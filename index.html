@@ -159,18 +159,8 @@
         }
 
         /* Imágenes de título de las secciones (Tamaño reducido a 320px) */
-        .img-titulo-amenaza {
-            max-width: 400px;
-            width: 80%;
-            height: auto;
-            margin-bottom: 45px;
-            margin-top: 70px;
-            object-fit: contain;
-            animation: pulsoDorado 3s ease-in-out infinite alternate;
-        }
-
-        .img-titulo-historia, .img-titulo-final {
-            max-width: 300px;
+        .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final {
+            max-width: 320px;
             width: 80%;
             height: auto;
             margin-bottom: 45px;
@@ -387,6 +377,60 @@
             width: auto;
             object-fit: contain;
             z-index: 10;
+        }
+
+        /* ========================================================= */
+        /*   ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (SMARTPHONES)       */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-1 {
+                height: 60px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .nav-botones {
+                margin-left: 0;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .btn-nav {
+                height: 28px;
+            }
+
+            main {
+                padding: 25px 20px 100px 20px;
+            }
+
+            .img-bienvenido {
+                max-width: 280px;
+                margin-bottom: 25px;
+            }
+
+            .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final {
+                max-width: 220px;
+                margin-top: 45px;
+                margin-bottom: 25px;
+            }
+
+            .bloque-texto {
+                font-size: 1rem;
+                line-height: 1.75;
+            }
+
+            .logo-2 {
+                bottom: 12px;
+                right: 12px;
+                height: 28px;
+            }
         }
     </style>
 </head>
