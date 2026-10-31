@@ -108,8 +108,8 @@
 
         /* Imagen de cabecera de la sección Descargas con brillo y pulso */
         .img-seccion {
-            max-width: 380px;
-            width: 100%;
+            max-width: 320px;
+            width: 80%;
             height: auto;
             margin-bottom: 45px;
             object-fit: contain;
@@ -195,6 +195,70 @@
             width: auto;
             object-fit: contain;
             z-index: 10;
+        }
+
+        /* ========================================================= */
+        /*   ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (SMARTPHONES)       */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-1 {
+                height: 60px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .nav-botones {
+                margin-left: 0;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .btn-nav {
+                height: 28px;
+            }
+
+            main {
+                padding: 25px 20px 100px 20px;
+            }
+
+            .img-seccion {
+                max-width: 220px;
+                margin-bottom: 25px;
+            }
+
+            .panel-descarga {
+                padding: 25px 20px 45px 20px; /* Dejamos espacio abajo para que no choque la fecha */
+            }
+
+            .titulo-panel {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+
+            .desc-panel {
+                font-size: 0.95rem;
+                margin-bottom: 15px;
+            }
+
+            .fecha-actualizacion {
+                position: static; /* Cambiamos a estático para que baje fluidamente en móviles */
+                display: block;
+                margin-top: 10px;
+                font-size: 0.75rem;
+            }
+
+            .logo-2 {
+                bottom: 12px;
+                right: 12px;
+                height: 28px;
+            }
         }
     </style>
 </head>
