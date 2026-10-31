@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Deathmatch - Contribuidores</title>
+
+    <style>
+        /* Carga de la fuente personalizada local */
+        @font-face {
+            font-family: 'MinecraftCustom';
+            src: url('Minecraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MinecraftCustom', monospace, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            
+            /* Degradado de fondo animado */
+            background: linear-gradient(180deg, #660000 0%, #1a0000 35%, #000000 70%);
+            background-size: 100% 200%;
+            animation: moverDegradado 8s ease infinite alternate;
+            position: relative;
+        }
+
+        @keyframes moverDegradado {
+            0% {
+                background-position: top;
+            }
+            100% {
+                background-position: bottom;
+            }
+        }
+
+        /* Barra superior / Encabezado */
+        header {
+            width: 100%;
+            padding: 4px 30px;
+            background-color: rgba(0, 0, 0, 0.65);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* Logo 1 (Arriba a la izquierda) */
+        .logo-1 {
+            height: 100px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            margin-top: 30px;
+            margin-bottom: 4px;
+        }
+
+        /* Contenedor de los botones superior */
+        .nav-botones {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 40px;
+            flex-wrap: nowrap;
+        }
+
+        .btn-nav {
+            display: block;
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            cursor: pointer;
+            will-change: transform, filter;
+            transform: translateZ(0);
+            transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), filter 0.25s ease;
+        }
+
+        .btn-nav:hover {
+            transform: scale(1.06) translateZ(0);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+        }
+
+        /* Contenedor principal ampliado */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 1300px; /* Ampliado para que los paneles sean más grandes */
+            margin: 0 auto;
+            padding: 40px 180px 140px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Imagen de la sección (Título Contribuidores) con brillo y pulso */
+        .img-seccion {
+            max-width: 420px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 45px;
+            object-fit: contain;
+            animation: pulsoSeccion 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulsoSeccion {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+            }
+            100% {
+                transform: scale(1.04);
+                filter: drop-shadow(0 0 22px rgba(255, 215, 0, 0.8));
+            }
+        }
+
+        /* Contenedor de las tarjetas de contribuidores */
+        .contenedor-tarjetas {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Estilo de cada tarjeta (más grande y espaciosa) */
+        .tarjeta-contribuidor {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 2px solid #ffffff;
+            border-radius: 6px;
+            padding: 35px 40px; /* Mayor padding para ampliar el panel */
+            gap: 35px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.85);
+        }
+
+        /* Contenedor de la imagen del avatar más grande */
+        .avatar-box {
+            width: 115px;
+            height: 115px;
+            border: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background-color: rgba(20, 20, 20, 0.85);
+        }
+
+        .avatar-img {
+            max-width: 82%;
+            max-height: 82%;
+            object-fit: contain;
+        }
+
+        /* Información del contribuidor */
+        .info-contribuidor {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Nombre Maci_Hq con pulso y brillo blanco */
+        .nombre-maci {
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            animation: pulsoBlanco 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulsoBlanco {
+            0% {
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
+                transform: scale(1);
+            }
+            100% {
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+                transform: scale(1.02);
+            }
+        }
+
+        /* Nombre RamaWM29 con pulso y brillo magenta */
+        .nombre-rama {
+            font-size: 1.5rem;
+            color: #ff44ff; /* Tono base magenta claro */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            animation: pulsoMagenta 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulsoMagenta {
+            0% {
+                filter: drop-shadow(0 0 2px rgba(255, 0, 255, 0.4));
+                transform: scale(1);
+            }
+            100% {
+                filter: drop-shadow(0 0 12px rgba(255, 0, 255, 0.95));
+                transform: scale(1.02);
+            }
+        }
+
+        .descripcion-contribuidor {
+            font-size: 1.15rem; /* Texto más grande */
+            color: #e0e0e0;
+            line-height: 1.7;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Logo 2 (Abajo a la derecha) */
+        .logo-2 {
+            position: fixed;
+            bottom: 20px;
+            right: 25px;
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado superior -->
+    <header>
+        <a href="index.html"><img src="https://i.imgur.com/eSClUmH.png" alt="Minecraft Deathmatch Logo" class="logo-1"></a>
+        
+        <nav class="nav-botones">
+            <a href="participantes.html"><img src="https://i.imgur.com/BmuM8tb.png" alt="Participantes" class="btn-nav"></a>
+            <a href="cambios.html"><img src="https://i.imgur.com/PrP3vfI.png" alt="Cambios" class="btn-nav"></a>
+            <a href="descargas.html"><img src="https://i.imgur.com/wQSTFtZ.png" alt="Descargas" class="btn-nav"></a>
+            <a href="contribuidores.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Contribuidores" class="btn-nav"></a>
+        </nav>
+    </header>
+
+    <!-- Área de contenido principal -->
+    <main>
+        <!-- Imagen de cabecera de la sección (1) con efecto de brillo -->
+        <img src="https://i.imgur.com/vV00qWE.png" alt="Contribuidores" class="img-seccion">
+
+        <!-- Lista de Tarjetas de Contribuidores -->
+        <div class="contenedor-tarjetas">
+            
+            <!-- Contribuidor 1: Maci_Hq -->
+            <div class="tarjeta-contribuidor">
+                <div class="avatar-box">
+                    <img src="https://i.imgur.com/Q9T667J.png" alt="Avatar Maci_Hq" class="avatar-img">
+                </div>
+                <div class="info-contribuidor">
+                    <h2 class="nombre-maci">Maci_Hq</h2>
+                    <p class="descripcion-contribuidor">Creador, programador, creador de ideas principales y director de el proyecto</p>
+                </div>
+            </div>
+
+            <!-- Contribuidor 2: RamaWM29 -->
+            <div class="tarjeta-contribuidor">
+                <div class="avatar-box">
+                    <img src="https://i.imgur.com/0hhCiKo.png" alt="Avatar RamaWM29" class="avatar-img">
+                </div>
+                <div class="info-contribuidor">
+                    <h2 class="nombre-rama">RamaWM29</h2>
+                    <p class="descripcion-contribuidor">Asistente, beta tester, gestion de participantes, ayudante del proyecto y moderador.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Logo Maci Hq Studios -->
+    <img src="https://i.imgur.com/tPcG0ge.png" alt="Maci HQ Studios Logo" class="logo-2">
+
+</body>
+</html>
