@@ -108,8 +108,8 @@
 
         /* Imagen de cabecera de la sección Cambios con brillo y pulso */
         .img-seccion {
-            max-width: 380px;
-            width: 100%;
+            max-width: 320px;
+            width: 80%;
             height: auto;
             margin-bottom: 45px;
             object-fit: contain;
@@ -161,6 +161,57 @@
             width: auto;
             object-fit: contain;
             z-index: 10;
+        }
+
+        /* ========================================================= */
+        /*   ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (SMARTPHONES)       */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-1 {
+                height: 60px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .nav-botones {
+                margin-left: 0;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .btn-nav {
+                height: 28px;
+            }
+
+            main {
+                padding: 25px 20px 100px 20px;
+            }
+
+            .img-seccion {
+                max-width: 220px;
+                margin-bottom: 25px;
+            }
+
+            .panel-cambios {
+                padding: 35px 20px;
+            }
+
+            .mensaje-cambios {
+                font-size: 1rem;
+            }
+
+            .logo-2 {
+                bottom: 12px;
+                right: 12px;
+                height: 28px;
+            }
         }
     </style>
 </head>
