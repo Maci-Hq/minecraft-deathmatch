@@ -95,7 +95,7 @@
         main {
             flex: 1;
             width: 100%;
-            max-width: 1300px; /* Ampliado para que los paneles sean más grandes */
+            max-width: 1300px;
             margin: 0 auto;
             padding: 40px 180px 140px 50px;
             display: flex;
@@ -105,8 +105,8 @@
 
         /* Imagen de la sección (Título Contribuidores) con brillo y pulso */
         .img-seccion {
-            max-width: 420px;
-            width: 100%;
+            max-width: 320px;
+            width: 80%;
             height: auto;
             margin-bottom: 45px;
             object-fit: contain;
@@ -139,7 +139,7 @@
             background-color: rgba(0, 0, 0, 0.6);
             border: 2px solid #ffffff;
             border-radius: 6px;
-            padding: 35px 40px; /* Mayor padding para ampliar el panel */
+            padding: 35px 40px;
             gap: 35px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.85);
         }
@@ -191,7 +191,7 @@
         /* Nombre RamaWM29 con pulso y brillo magenta */
         .nombre-rama {
             font-size: 1.5rem;
-            color: #ff44ff; /* Tono base magenta claro */
+            color: #ff44ff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
             animation: pulsoMagenta 2.5s ease-in-out infinite alternate;
         }
@@ -208,7 +208,7 @@
         }
 
         .descripcion-contribuidor {
-            font-size: 1.15rem; /* Texto más grande */
+            font-size: 1.15rem;
             color: #e0e0e0;
             line-height: 1.7;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
@@ -223,6 +223,70 @@
             width: auto;
             object-fit: contain;
             z-index: 10;
+        }
+
+        /* ========================================================= */
+        /*   ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (SMARTPHONES)       */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-1 {
+                height: 60px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .nav-botones {
+                margin-left: 0;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .btn-nav {
+                height: 28px;
+            }
+
+            main {
+                padding: 25px 20px 100px 20px;
+            }
+
+            .img-seccion {
+                max-width: 220px;
+                margin-bottom: 25px;
+            }
+
+            .tarjeta-contribuidor {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 25px 20px;
+                gap: 20px;
+            }
+
+            .avatar-box {
+                width: 90px;
+                height: 90px;
+            }
+
+            .nombre-maci, .nombre-rama {
+                font-size: 1.25rem;
+            }
+
+            .descripcion-contribuidor {
+                font-size: 1rem;
+            }
+
+            .logo-2 {
+                bottom: 12px;
+                right: 12px;
+                height: 28px;
+            }
         }
     </style>
 </head>
