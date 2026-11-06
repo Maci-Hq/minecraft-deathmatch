@@ -566,42 +566,44 @@
 
         .objeto-universo {
             position: absolute;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
             cursor: pointer;
             transform: translate(-50%, -50%);
-            transition: transform 0.3s ease, filter 0.3s ease;
-            will-change: transform, filter;
+            transition: transform 0.3s ease;
+            will-change: transform;
         }
 
         .objeto-universo.rojo {
-            background-color: #ff0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+            width: 70px;
+            height: 70px;
         }
 
         .objeto-universo.morado {
             width: 90px;
             height: 90px;
-            background-color: #b000ff;
-            box-shadow: 0 0 25px rgba(176, 0, 255, 0.8);
         }
 
         .objeto-universo.celeste {
-            background-color: #00ffff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            width: 70px;
+            height: 70px;
         }
 
         .objeto-universo.blanco {
             width: 45px;
             height: 45px;
-            background-color: #ffffff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
         }
 
-        .objeto-universo:hover {
-            transform: translate(-50%, -50%) scale(1.12);
-            filter: brightness(1.25);
+        .img-objeto-universo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .objeto-universo:hover .img-objeto-universo {
+            transform: scale(1.12);
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9)) brightness(1.25);
         }
 
         /* Tooltip al apoyar el cursor */
@@ -629,7 +631,7 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Interfaz de Detalle (Referencia 2) */
+        /* Interfaz de Detalle (Referencia 2) con imagen dedicada distinta */
         .universo-detalle {
             position: absolute;
             top: 0;
@@ -683,13 +685,14 @@
             gap: 60px;
         }
 
-        .detalle-circulo-grande {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
+        .detalle-imagen-grande {
+            width: 240px;
+            height: 240px;
+            object-fit: contain;
             flex-shrink: 0;
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
-            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+            border-radius: 12px;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
+            transition: transform 0.4s ease, filter 0.4s ease;
         }
 
         .detalle-texto-contenedor {
@@ -896,27 +899,31 @@
         <img src="https://i.imgur.com/IMAGEN_UNIVERSOS_AQUI.png" alt="Universos" class="img-titulo-universos" id="anclaUniversos">
         
         <div class="panel-universos-grande" id="panelUniversos">
-            <!-- Vista de Mapa Estelar con las 4 esferas (Distribución Ref 1) -->
+            <!-- Vista de Mapa Estelar con las 4 esferas como imágenes (Distribución Ref 1) -->
             <div class="universo-mapa" id="universoMapa">
                 <div class="objeto-universo rojo" style="top: 60%; left: 18%;" data-tooltip="Test: Universo Rojo" data-target="detalleRojo">
+                    <img src="https://i.imgur.com/diArXwO.png" alt="Universo Rojo" class="img-objeto-universo">
                     <div class="tooltip-box">Test: Universo Rojo</div>
                 </div>
                 <div class="objeto-universo morado" style="top: 25%; left: 50%;" data-tooltip="Test: Universo Morado" data-target="detalleMorado">
+                    <img src="https://i.imgur.com/cuTcV5m.png" alt="Universo Morado" class="img-objeto-universo">
                     <div class="tooltip-box">Test: Universo Morado</div>
                 </div>
                 <div class="objeto-universo celeste" style="top: 60%; left: 75%;" data-tooltip="Test: Universo Celeste" data-target="detalleCeleste">
+                    <img src="https://i.imgur.com/UcBzRy2.png" alt="Universo Celeste" class="img-objeto-universo">
                     <div class="tooltip-box">Test: Universo Celeste</div>
                 </div>
                 <div class="objeto-universo blanco" style="top: 78%; left: 49%;" data-tooltip="Test: Universo Blanco" data-target="detalleBlanco">
+                    <img src="https://i.imgur.com/AdAoztL.png" alt="Universo Blanco" class="img-objeto-universo">
                     <div class="tooltip-box">Test: Universo Blanco</div>
                 </div>
             </div>
 
-            <!-- Vista de Detalle / Interfaz (Distribución Ref 2 con transición) -->
+            <!-- Vista de Detalle / Interfaz con imagen grande distinta (Referencia 2) -->
             <div class="universo-detalle" id="universoDetalle">
                 <button class="btn-volver-mapa" id="btnVolverMapa">← Volver</button>
                 <div class="detalle-contenido">
-                    <div class="detalle-circulo-grande" id="detalleCirculoGrande"></div>
+                    <img class="detalle-imagen-grande" id="detalleImagenGrande" src="" alt="Detalle Universo">
                     <div class="detalle-texto-contenedor">
                         <div class="detalle-texto-titulo" id="detalleTitulo">Texto</div>
                         <p class="detalle-texto-desc" id="detalleDesc">Placeholder description for this universe object. Interactive detail interface view.</p>
@@ -1159,34 +1166,31 @@
             const universoDetalle = document.getElementById('universoDetalle');
             const btnVolverMapa = document.getElementById('btnVolverMapa');
             
-            const detalleCirculoGrande = document.getElementById('detalleCirculoGrande');
             const detalleTitulo = document.getElementById('detalleTitulo');
             const detalleDesc = document.getElementById('detalleDesc');
+            const detalleImagenGrande = document.getElementById('detalleImagenGrande');
 
+            // Imágenes y descripciones distintas asignadas al hacer click en cada objeto
             const datosUniversos = {
                 detalleRojo: {
                     titulo: "Universo Primigenio (Rojo)",
                     desc: "Test: Placeholder description detailing the chaotic nature and temporal instability inherent to this realm. ZONA DE ALTO PELIGRO.",
-                    color: "#ff0000",
-                    sombra: "rgba(255, 0, 0, 0.7)"
+                    imagenDetalle: "https://i.imgur.com/NgYo8NB.png"
                 },
                 detalleMorado: {
                     titulo: "Dimensión del Vacío (Morado)",
                     desc: "Test: Placeholder description for the core nexus zone. Contains immense cosmic energy reserves and ancient secrets.",
-                    color: "#b000ff",
-                    sombra: "rgba(176, 0, 255, 0.8)"
+                    imagenDetalle: "https://i.imgur.com/MEu1y81.png"
                 },
                 detalleCeleste: {
                     titulo: "Plano Etéreo (Celeste)",
                     desc: "Test: Placeholder description explaining the crystalline structure and harmonious fluctuations of temporal energy.",
-                    color: "#00ffff",
-                    sombra: "rgba(0, 255, 255, 0.7)"
+                    imagenDetalle: "https://i.imgur.com/diArXwO.png"
                 },
                 detalleBlanco: {
                     titulo: "El Punto Cero (Blanco)",
                     desc: "Test: Placeholder description representing the absolute convergence point of all multiversal threads and timelines.",
-                    color: "#ffffff",
-                    sombra: "rgba(255, 255, 255, 0.9)"
+                    imagenDetalle: "https://i.imgur.com/cuTcV5m.png"
                 }
             };
 
@@ -1197,8 +1201,7 @@
                     if (info) {
                         detalleTitulo.textContent = info.titulo;
                         detalleDesc.textContent = info.desc;
-                        detalleCirculoGrande.style.backgroundColor = info.color;
-                        detalleCirculoGrande.style.boxShadow = `0 0 50px ${info.sombra}`;
+                        detalleImagenGrande.src = info.imagenDetalle;
                     }
 
                     universoMapa.classList.add('oculto');
@@ -1216,4 +1219,4 @@
     </script>
 
 </body>
-</html>s
+</html>
