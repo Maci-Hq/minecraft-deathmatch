@@ -1,4 +1,4 @@
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -100,7 +100,22 @@ html_content = """<!DOCTYPE html>
             overflow: hidden;
         }
 
-        /* Contenedor de estrellas animadas individuales */
+        /* Capa 5: Fondo Rojo Oscuro - Rojo con Estrellas Dinámicas Rojas (Sección Mortales) */
+        .fondo-mortales-capa {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #4d0000 0%, #800000 40%, #260000 80%);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s linear;
+            overflow: hidden;
+        }
+
+        /* Contenedores de estrellas animadas individuales */
         .estrella {
             position: absolute;
             background-color: #00ffff;
@@ -121,18 +136,24 @@ html_content = """<!DOCTYPE html>
             }
         }
 
-        /* Capa 5: Fondo Rojo Oscuro - Rojo (Sección Mortales) */
-        .fondo-mortales-capa {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, #4d0000 0%, #800000 40%, #260000 80%);
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.1s linear;
+        .estrella-roja {
+            position: absolute;
+            background-color: #ff3333;
+            border-radius: 50%;
+            animation: parpadeoEstrellaRoja var(--duracion) ease-in-out infinite alternate;
+            box-shadow: 0 0 6px #ff0000;
+        }
+
+        @keyframes parpadeoEstrellaRoja {
+            0% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.3);
+                box-shadow: 0 0 12px #ff4d4d;
+            }
         }
 
         /* Barra superior / Encabezado */
@@ -206,7 +227,7 @@ html_content = """<!DOCTYPE html>
         }
 
         /* Imágenes de título de las secciones (Tamaño reducido a 320px) */
-        .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies {
+        .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies, .img-titulo-universos {
             max-width: 320px;
             width: 80%;
             height: auto;
@@ -504,6 +525,27 @@ html_content = """<!DOCTYPE html>
             filter: drop-shadow(0 0 12px rgba(255, 51, 51, 0.5));
         }
 
+        /* Panel negro grande con fondo de espacio (Sección Universos) */
+        .panel-universos-grande {
+            width: 100%;
+            height: 450px;
+            background-color: #000000;
+            background-image: 
+                radial-gradient(1.5px 1.5px at 10% 20%, #ffffff 100%, transparent),
+                radial-gradient(2px 2px at 25% 70%, #ffffff 100%, transparent),
+                radial-gradient(1px 1px at 50% 30%, #ffffff 100%, transparent),
+                radial-gradient(2px 2px at 75% 80%, #ffffff 100%, transparent),
+                radial-gradient(1.5px 1.5px at 90% 15%, #ffffff 100%, transparent),
+                radial-gradient(1px 1px at 40% 90%, #ffffff 100%, transparent);
+            background-size: 100% 100%;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
         /* Logo 2 (Abajo a la derecha) */
         .logo-2 {
             position: fixed;
@@ -551,13 +593,13 @@ html_content = """<!DOCTYPE html>
                 margin-bottom: 25px;
             }
 
-            .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies, .img-titulo-inmortales, .img-titulo-mortales {
+            .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies, .img-titulo-inmortales, .img-titulo-mortales, .img-titulo-universos {
                 max-width: 220px;
                 margin-top: 45px;
                 margin-bottom: 25px;
             }
 
-            .img-titulo-inmortales, .img-titulo-mortales {
+            .img-titulo-inmortales, .img-titulo-mortales, .img-titulo-universos {
                 margin-top: 10px;
             }
 
@@ -579,6 +621,10 @@ html_content = """<!DOCTYPE html>
                 max-width: 240px;
             }
 
+            .panel-universos-grande {
+                height: 300px;
+            }
+
             .logo-2 {
                 bottom: 12px;
                 right: 12px;
@@ -597,7 +643,10 @@ html_content = """<!DOCTYPE html>
         <!-- Contenedor dinámico de estrellas -->
         <div id="estrellasContainer"></div>
     </div>
-    <div class="fondo-mortales-capa" id="capaMortales"></div>
+    <div class="fondo-mortales-capa" id="capaMortales">
+        <!-- Contenedor dinámico de estrellas rojas -->
+        <div id="estrellasRojasContainer"></div>
+    </div>
 
     <!-- Encabezado superior con Logo y Botones -->
     <header>
@@ -655,7 +704,7 @@ html_content = """<!DOCTYPE html>
 
             <p>Previendo la inminente aparición de los refuerzos, los inmortales decidieron adelantar su siguiente fase. Intentaron por primera vez quitarle la inmortalidad a un combatiente herido, pero fracasaron rotunda y trágicamente. Los cálculos numéricos eran correctos, pero su hipótesis de que debilitar al portador favorecería el proceso fue errónea. El núcleo del inmortal, al encontrarse debilitado, era sumamente sensible y propenso a la sobrecarga, rompiendo la estabilidad interna de su propia esencia. Esto desató un efecto totalmente inesperado: si bien lograba arrebatarles la inmortalidad, también sumía al usuario en un estado de cansancio perpetuo, transmitiendo un sufrimiento similar al de una muerte lenta que jamás terminaba de consumarse. Ante este peligro, los mortales cambiaron su estrategia por completo: destinaron a casi todo su personal a mantener cautivos a los inmortales restantes en un estado saludable y estable, mientras un pequeño grupo de élite se encargaba de interrogar e investigar a <strong>Maci_Hq</strong> para forzarlo a detener el avance de los héroes.</p>
 
-            <p>Por su parte, los héroes ya habían encontrado solución a múltiples problemáticas en el <strong>Reino Cósmico</strong>, pero al ser notificados de la situación cambiaron drásticamente sus tácticas. Iniciaron una mejora apresurada en las defensas del <strong>Reino Cósmico</strong>, conscientes de que durante los eventos de <strong>Final Paradox</strong> sufrieron numerosas bajas y ahora ellos se erigían como los protectores principales. Aunque era poco probable que algún invasor lograra tomar el control, la certeza de que una amenaza había iniciado una caza sistemática en el <strong>Universo Minecraft</strong> los obligó a blindar el reino y sus artefactos más preciados. Dejaron sus armas especiales resguardadas allí, pues conocían el riesgo de perder la batalla y no podian permitir que semejante poder cayera en manos equivocadas. Emprendieron el viaje y, aunque el traslado entre universos tomó más tiempo del esperado, al llegar solo se toparon con un caos inminente. Se prepararon para librar una guerra total que al final nunca ocurrió: los soldados enemigos se retiraron de repente y el plan de los efímeros se puso en marcha. Juntaron a todos los mortales y lanzaron su ataque definitivo; el cielo entero se enrojeció y, en un fulminante haz de luz, los inmortales perdieron por fin su bien más preciado. El final había llegado: el líder de los efímeros dio inicio a su macabro juego, el <strong class="palabra-odio-glitch">DEATHMATCH</strong>.</p>
+            <p>Por su parte, los héroes ya habían encontrado solución a múltiples problemáticas en el <strong>Reino Cósmico</strong>, pero al ser notificados de la situación cambiaron drásticamente sus tácticas. Iniciaron una mejora apresurada en las defensas del <strong>Reino Cósmico</strong>, conscientes de que durante los eventos de <strong>Final Paradox</strong> sufrieron numerosas bajas y ahora ellos se erigían como los protectores principales. Aunque era poco probable que algún invasor lograra tomar el control, la certeza de que una amenaza había iniciado una caza sistemática en el <strong>Universo Minecraft</strong> los obligó a blindar el reino y sus artefactos más preciados. Dejaron sus armas especiales resguardadas allí, pues conocían el riesgo de perder la batalla y no podían permitir que semejante poder cayera en manos equivocadas. Emprendieron el viaje y, aunque el traslado entre universos tomó más tiempo del esperado, al llegar solo se toparon con un caos inminente. Se prepararon para librar una guerra total que al final nunca ocurrió: los soldados enemigos se retiraron de repente y el plan de los efímeros se puso en marcha. Juntaron a todos los mortales y lanzaron su ataque definitivo; el cielo entero se enrojeció y, en un fulminante haz de luz, los inmortales perdieron por fin su bien más preciado. El final había llegado: el líder de los efímeros dio inicio a su macabro juego, el <strong class="palabra-odio-glitch">DEATHMATCH</strong>.</p>
         </section>
 
         <!-- Sección posterior al fin: Especies e Inmortales -->
@@ -678,6 +727,11 @@ html_content = """<!DOCTYPE html>
             </section>
             <img src="https://i.imgur.com/MEu1y81.png" alt="Ilustración Mortales" class="img-lateral-mortales">
         </div>
+
+        <!-- Nueva Sección: Universos -->
+        <img src="https://i.imgur.com/IMAGEN_UNIVERSOS_AQUI.png" alt="Universos" class="img-titulo-universos" id="anclaUniversos">
+        
+        <div class="panel-universos-grande"></div>
     </main>
 
     <!-- Logo Maci Hq Studios -->
@@ -686,7 +740,7 @@ html_content = """<!DOCTYPE html>
     <!-- Script de animación, generación de estrellas y fundido gradual del fondo -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Generar estrellas reales dinámicamente en el contenedor
+            // Generar estrellas celestes en Especies
             const containerEstrellas = document.getElementById('estrellasContainer');
             if (containerEstrellas) {
                 const cantidadEstrellas = 75;
@@ -695,8 +749,8 @@ html_content = """<!DOCTYPE html>
                     estrella.className = 'estrella';
                     const posX = Math.random() * 100;
                     const posY = Math.random() * 100;
-                    const tamano = Math.random() * 2 + 1; // 1px a 3px
-                    const duracion = (Math.random() * 3 + 2).toFixed(2); // 2s a 5s
+                    const tamano = Math.random() * 2 + 1; 
+                    const duracion = (Math.random() * 3 + 2).toFixed(2); 
 
                     estrella.style.left = `${posX}%`;
                     estrella.style.top = `${posY}%`;
@@ -706,6 +760,29 @@ html_content = """<!DOCTYPE html>
                     estrella.style.animationDelay = `${(Math.random() * 3).toFixed(2)}s`;
 
                     containerEstrellas.appendChild(estrella);
+                }
+            }
+
+            // Generar estrellas rojas en Mortales
+            const containerEstrellasRojas = document.getElementById('estrellasRojasContainer');
+            if (containerEstrellasRojas) {
+                const cantidadEstrellasRojas = 75;
+                for (let i = 0; i < cantidadEstrellasRojas; i++) {
+                    const estrellaRoja = document.createElement('div');
+                    estrellaRoja.className = 'estrella-roja';
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const tamano = Math.random() * 2 + 1; 
+                    const duracion = (Math.random() * 3 + 2).toFixed(2); 
+
+                    estrellaRoja.style.left = `${posX}%`;
+                    estrellaRoja.style.top = `${posY}%`;
+                    estrellaRoja.style.width = `${tamano}px`;
+                    estrellaRoja.style.height = `${tamano}px`;
+                    estrellaRoja.style.setProperty('--duracion', `${duracion}s`);
+                    estrellaRoja.style.animationDelay = `${(Math.random() * 3).toFixed(2)}s`;
+
+                    containerEstrellasRojas.appendChild(estrellaRoja);
                 }
             }
 
@@ -788,6 +865,7 @@ html_content = """<!DOCTYPE html>
             const imgFinal = document.getElementById('anclaFinal');
             const imgEspecies = document.getElementById('anclaEspecies');
             const imgMortales = document.getElementById('anclaMortales');
+            const imgUniversos = document.getElementById('anclaUniversos');
 
             window.addEventListener('scroll', () => {
                 const windowHeight = window.innerHeight;
@@ -864,13 +942,21 @@ html_content = """<!DOCTYPE html>
                     capaEspecies.style.opacity = progEspecies;
                 }
 
-                // 5. Control de fundido a Rojo Oscuro - Rojo (Mortales)
+                // 5. Control de fundido a Rojo Oscuro - Rojo con Estrellas (Mortales)
                 if (imgMortales && capaMortales) {
                     const rect = imgMortales.getBoundingClientRect();
                     const start = windowHeight * 0.8;
                     const end = windowHeight * 0.2;
                     let progMortales = (start - rect.top) / (start - end);
                     progMortales = Math.max(0, Math.min(1, progMortales));
+
+                    if (imgUniversos) {
+                        const rectUniversos = imgUniversos.getBoundingClientRect();
+                        if (rectUniversos.top < windowHeight) {
+                            let progSalidaMortales = (windowHeight - rectUniversos.top) / windowHeight;
+                            progMortales = Math.max(0, progMortales - progSalidaMortales);
+                        }
+                    }
                     capaMortales.style.opacity = progMortales;
                 }
             });
