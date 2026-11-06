@@ -159,7 +159,7 @@
         }
 
         /* Imágenes de título de las secciones (Tamaño reducido a 320px) */
-        .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final {
+        .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies, .img-titulo-inmortales {
             max-width: 320px;
             width: 80%;
             height: auto;
@@ -167,6 +167,11 @@
             margin-top: 70px;
             object-fit: contain;
             animation: pulsoDorado 3s ease-in-out infinite alternate;
+        }
+
+        /* Ajuste específico para que Especies e Inmortales vayan juntas sin tanta separación */
+        .img-titulo-inmortales {
+            margin-top: 15px;
         }
 
         @keyframes pulsoDorado {
@@ -368,6 +373,33 @@
         .texto-amenaza strong { color: #4dd2ff; }
         .texto-final strong { color: #ffffff; }
 
+        /* Estilo para la sección de Inmortales con panel y imagen a la derecha */
+        .contenedor-inmortales {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-top: 10px;
+        }
+
+        .panel-inmortales {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 2px solid #ffffff;
+            border-radius: 6px;
+            padding: 35px 40px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.85);
+        }
+
+        .img-lateral-inmortales {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+        }
+
         /* Logo 2 (Abajo a la derecha) */
         .logo-2 {
             position: fixed;
@@ -415,15 +447,32 @@
                 margin-bottom: 25px;
             }
 
-            .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final {
+            .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies, .img-titulo-inmortales {
                 max-width: 220px;
                 margin-top: 45px;
                 margin-bottom: 25px;
             }
 
+            .img-titulo-inmortales {
+                margin-top: 10px;
+            }
+
             .bloque-texto {
                 font-size: 1rem;
                 line-height: 1.75;
+            }
+
+            .contenedor-inmortales {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .panel-inmortales {
+                padding: 25px 20px;
+            }
+
+            .img-lateral-inmortales {
+                max-width: 240px;
             }
 
             .logo-2 {
@@ -489,13 +538,24 @@
             <p>Creó un equipo y montó laboratorios en donde puso todo a prueba, fabricando el primer enlace y enviando a investigadores a pasar tiempo buscando algún núcleo o batería que pudieran aprovechar. Pocos días antes del regreso de <strong>Maci_Hq</strong> al plano inmortal, encontraron algo: <strong>El Núcleo del Universo</strong>. Lo llevaron a la <strong>Dimensión Efímera</strong> y lo probaron de diferentes formas, notando que no tenía ninguna función fuera de su universo. Así que planearon su último movimiento: crear una base en un punto medio entre ambos universos donde se guardaría el núcleo funcional, conectando el plano efímero para poder hacer pruebas y cambios que afectaran al <strong>Universo Minecraft</strong>. Al lograrlo, comenzó la cacería de inmortales; su plan era simple: llevar a soldados de su universo al <strong>plano inmortal</strong> y comenzar a batallar haciendo cambios que perjudicasen a los inmortales hasta neutralizarlos, quitándoles sus recursos y dejándolos al borde de la muerte para evitar que revivan con su vitalidad completa. Todo esto con un único plan en mente: <strong class="palabra-inmortalidad-roja">Quitarles la inmortalidad</strong>.</p>
         </section>
 
+        <!-- Nuevos Apartados: Especies e Inmortales -->
+        <img src="https://i.imgur.com/IMAGEN_ESPECIES_AQUI.png" alt="Especies" class="img-titulo-especies">
+        <img src="https://i.imgur.com/IMAGEN_INMORTALES_AQUI.png" alt="Inmortales" class="img-titulo-inmortales">
+
+        <div class="contenedor-inmortales">
+            <section class="panel-inmortales bloque-texto texto-final" id="textoAnimadoInmortales">
+                <p>Los inmortales son seres que conforman el <strong>Universo Minecraft</strong>, su principal característica es que al morir reviven en su punto de spawn retrocediendo el tiempo ligeramente. Aunque eso no lo notan porque su universo es resistente y no es afectado por ese retroceso. Un ejemplo de inmortales serian <strong>Maci_Hq</strong> o <strong>RamaWM29</strong>.</p>
+            </section>
+            <img src="https://i.imgur.com/IMAGEN_LATERAL_AQUI.png" alt="Ilustración Inmortales" class="img-lateral-inmortales">
+        </div>
+
         <!-- Apartado 3: El Fin / Deathmatch -->
         <img src="https://i.imgur.com/AdAoztL.png" alt="El Fin" class="img-titulo-final" id="anclaFinal">
 
         <section class="bloque-texto texto-final" id="textoAnimado4">
             <p>Tras su regreso, <strong>Maci_Hq</strong> dejó su vida atrás y se fue a un continente alejado de los inmortales con la intención de vivir una vida tranquila. Pasó tres meses viviendo pacíficamente, aunque más temprano que tarde la armada inmortal lo forzó al caos del campo de batalla. Los inmortales opusieron una gran resistencia ante el guerrero, pero lo que marcó la definitiva diferencia fue un arma diseñada especialmente para acabar con él. Tras la pérdida de todos sus recursos, tótems y equipamiento, el inmortal logró destruir el arma, pero cayó rendido al suelo por el agotamiento absoluto. Sin embargo, durante el combate consiguió enviar un mensaje de auxilio al <strong>Reino Cósmico</strong>, por lo que la llegada de los héroes era inevitable.</p>
 
-            <p>Previendo la inminente aparición de los refuerzos, los inmortales decidieron adelantar su siguiente fase. Intentaron por primera vez quitarle la inmortalidad a un combatiente herido, pero fracasaron rotunda y trágicamente. Los cálculos numéricos eran correctos, pero su hipótesis de que debilitar al portador favorecería el proceso fue errónea. El núcleo del inmortal, al encontrarse debilitado, era sumamente sensible y propenso a la sobrecarga, rompiendo la estabilidad interna de su propia esencia. Esto desató un efecto totalmente inesperado: si bien lograba arrebatarles la inmortalidad, también sumía al usuario en un estado de cansancio perpetuo, transmitiendo un sufrimiento similar al de una muerte lenta que jamás terminaba de consumarse. Ante este peligro, los mortales cambiaron su estrategia por completo: destinaron a casi todo su personal a mantener cautivos a los inmortales restantes en un estado saludable y estable, mientras un pequeño grupo de élite se encargaba de interrogar e investigar a <strong>Maci_Hq</strong> para forzarlo a detener el avance de los héroes.</p>
+            <p>Previendo la inminente aparición de los refuerzos, los inmortales decidieron adelantar su siguiente fase. Intentaron por primera vez quitarle la inmortalidad a un combatiente herido, pero fracasaron rotunda y trágicamente. Los cálculos numéricos eran correctos, pero su hipótesis de que debilitar al portador favorecería el proceso fue errónea. El núcleo del inmortal, al encontrarse debilitado, era sumamente sensible y propenso a la sobrecarga, rompiendo la estabilidad interna de su propia esencia. Esto desató un efecto totalmente inesperado: si bien lograba arrebatarles la inmortalidad, también sumía al usuario en un estado de cansancio perpetuo, transmitiendo un sufrimiento similar al de una muerte lenta que jamás terminaba de consumarse. Ante这个 peligro, los mortales cambiaron su estrategia por completo: destinaron a casi todo su personal a mantener cautivos a los inmortales restantes en un estado saludable y estable, mientras un pequeño grupo de élite se encargaba de interrogar e investigar a <strong>Maci_Hq</strong> para forzarlo a detener el avance de los héroes.</p>
 
             <p>Por su parte, los héroes ya habían encontrado solución a múltiples problemáticas en el <strong>Reino Cósmico</strong>, pero al ser notificados de la situación cambiaron drásticamente sus tácticas. Iniciaron una mejora apresurada en las defensas del <strong>Reino Cósmico</strong>, conscientes de que durante los eventos de <strong>Final Paradox</strong> sufrieron numerosas bajas y ahora ellos se erigían como los protectores principales. Aunque era poco probable que algún invasor lograra tomar el control, la certeza de que una amenaza había iniciado una caza sistemática en el <strong>Universo Minecraft</strong> los obligó a blindar el reino y sus artefactos más preciados. Dejaron sus armas especiales resguardadas allí, pues conocían el riesgo de perder la batalla y no podían permitir que semejante poder cayera en manos equivocadas. Emprendieron el viaje y, aunque el traslado entre universos tomó más tiempo del esperado, al llegar solo se toparon con un caos inminente. Se prepararon para librar una guerra total que al final nunca ocurrió: los soldados enemigos se retiraron de repente y el plan de los efímeros se puso en marcha. Juntaron a todos los mortales y lanzaron su ataque definitivo; el cielo entero se enrojeció y, en un fulminante haz de luz, los inmortales perdieron por fin su bien más preciado. El final había llegado: el líder de los efímeros dio inicio a su macabro juego, el <strong class="palabra-odio-glitch">DEATHMATCH</strong>.</p>
         </section>
@@ -570,6 +630,7 @@
             animarTexto('textoAnimado1', 'palabra-chispa-roja');
             animarTexto('textoAnimado2', 'palabra-chispa-morada');
             animarTexto('textoAnimado3', 'palabra-chispa-celeste');
+            animarTexto('textoAnimadoInmortales', 'palabra-chispa-blanca');
             animarTexto('textoAnimado4', 'palabra-chispa-blanca');
 
             // Transición gradual de fondo basada en el desplazamiento (Scroll)
