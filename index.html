@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -39,20 +39,19 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(180deg, #660000 0%, #1a0000 40%, #000000 80%);
-            z-index: -5;
+            z-index: -6;
             pointer-events: none;
         }
 
         /* Capa intermedia 1: Fondo Morado (Primera historia) */
         .fondo-morado-capa {
-            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(180deg, #330033 0%, #11001a 40%, #000000 80%);
-            z-index: -4;
+            z-index: -5;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.1s linear;
@@ -60,14 +59,13 @@
 
         /* Capa intermedia 2: Fondo Celeste-Negro (Segunda historia) */
         .fondo-celeste-capa {
-            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(180deg, #003366 0%, #001a33 40%, #000000 80%);
-            z-index: -3;
+            z-index: -4;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.1s linear;
@@ -75,54 +73,66 @@
 
         /* Capa 3: Fondo Blanco-Negro (Final de la historia) */
         .fondo-blanco-capa {
-            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(180deg, #404040 0%, #1a1a1a 40%, #000000 80%);
-            z-index: -2;
+            z-index: -3;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.1s linear;
         }
 
-        /* Capa 4: Fondo Azul-Celeste con Estrellas Azules Parpadeantes (Sección Especies) */
+        /* Capa 4: Fondo Azul-Celeste con Estrellas Dinámicas Reales (Sección Especies) */
         .fondo-especies-capa {
-            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(1.5px 1.5px at 15% 20%, #00bfff 100%, transparent),
-                radial-gradient(2px 2px at 35% 60%, #0099ff 100%, transparent),
-                radial-gradient(1px 1px at 60% 15%, #33ccff 100%, transparent),
-                radial-gradient(2px 2px at 80% 40%, #00bfff 100%, transparent),
-                radial-gradient(1.5px 1.5px at 25% 85%, #0066ff 100%, transparent),
-                radial-gradient(2px 2px at 70% 80%, #3388ff 100%, transparent),
-                radial-gradient(1px 1px at 50% 45%, #00ffff 100%, transparent),
-                linear-gradient(180deg, #001133 0%, #002244 40%, #00081a 80%);
-            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+            background: linear-gradient(180deg, #001133 0%, #002244 40%, #00081a 80%);
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s linear;
+            overflow: hidden;
+        }
+
+        /* Contenedor de estrellas animadas individuales */
+        .estrella {
+            position: absolute;
+            background-color: #00ffff;
+            border-radius: 50%;
+            animation: parpadeoEstrella var(--duracion) ease-in-out infinite alternate;
+            box-shadow: 0 0 6px #00bfff;
+        }
+
+        @keyframes parpadeoEstrella {
+            0% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.3);
+                box-shadow: 0 0 12px #33ccff;
+            }
+        }
+
+        /* Capa 5: Fondo Rojo Oscuro - Rojo (Sección Mortales) */
+        .fondo-mortales-capa {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #4d0000 0%, #800000 40%, #260000 80%);
             z-index: -1;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.1s linear;
-            animation: parpadeoEstrellas 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes parpadeoEstrellas {
-            0% {
-                filter: brightness(0.7);
-            }
-            50% {
-                filter: brightness(1.3);
-            }
-            100% {
-                filter: brightness(0.85);
-            }
         }
 
         /* Barra superior / Encabezado */
@@ -217,6 +227,17 @@
             animation: pulsoCelesteInmortales 3s ease-in-out infinite alternate;
         }
 
+        /* Imagen de Mortales con Brillo Rojo */
+        .img-titulo-mortales {
+            max-width: 320px;
+            width: 80%;
+            height: auto;
+            margin-bottom: 45px;
+            margin-top: 60px;
+            object-fit: contain;
+            animation: pulsoRojoMortales 3s ease-in-out infinite alternate;
+        }
+
         @keyframes pulsoDorado {
             0% {
                 transform: scale(1);
@@ -236,6 +257,17 @@
             100% {
                 transform: scale(1.05);
                 filter: drop-shadow(0 0 22px rgba(0, 204, 255, 0.9));
+            }
+        }
+
+        @keyframes pulsoRojoMortales {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.4));
+            }
+            100% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.9));
             }
         }
 
@@ -427,8 +459,8 @@
         .texto-amenaza strong { color: #4dd2ff; }
         .texto-final strong { color: #ffffff; }
 
-        /* Estilo para la sección de Inmortales con panel e imagen a la derecha */
-        .contenedor-inmortales {
+        /* Estilo para los contenedores de paneles con imagen lateral */
+        .contenedor-inmortales, .contenedor-mortales {
             width: 100%;
             display: flex;
             align-items: center;
@@ -452,6 +484,24 @@
             object-fit: contain;
             border-radius: 6px;
             filter: drop-shadow(0 0 12px rgba(0, 204, 255, 0.5));
+        }
+
+        .panel-mortales {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 2px solid #ff3333;
+            border-radius: 6px;
+            padding: 35px 40px;
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+        }
+
+        .img-lateral-mortales {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            filter: drop-shadow(0 0 12px rgba(255, 51, 51, 0.5));
         }
 
         /* Logo 2 (Abajo a la derecha) */
@@ -501,13 +551,13 @@
                 margin-bottom: 25px;
             }
 
-            .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies, .img-titulo-inmortales {
+            .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies, .img-titulo-inmortales, .img-titulo-mortales {
                 max-width: 220px;
                 margin-top: 45px;
                 margin-bottom: 25px;
             }
 
-            .img-titulo-inmortales {
+            .img-titulo-inmortales, .img-titulo-mortales {
                 margin-top: 10px;
             }
 
@@ -516,16 +566,16 @@
                 line-height: 1.75;
             }
 
-            .contenedor-inmortales {
+            .contenedor-inmortales, .contenedor-mortales {
                 flex-direction: column;
                 gap: 20px;
             }
 
-            .panel-inmortales {
+            .panel-inmortales, .panel-mortales {
                 padding: 25px 20px;
             }
 
-            .img-lateral-inmortales {
+            .img-lateral-inmortales, .img-lateral-mortales {
                 max-width: 240px;
             }
 
@@ -543,7 +593,11 @@
     <div class="fondo-morado-capa" id="capaMorada"></div>
     <div class="fondo-celeste-capa" id="capaCeleste"></div>
     <div class="fondo-blanco-capa" id="capaBlanca"></div>
-    <div class="fondo-especies-capa" id="capaEspecies"></div>
+    <div class="fondo-especies-capa" id="capaEspecies">
+        <!-- Contenedor dinámico de estrellas -->
+        <div id="estrellasContainer"></div>
+    </div>
+    <div class="fondo-mortales-capa" id="capaMortales"></div>
 
     <!-- Encabezado superior con Logo y Botones -->
     <header>
@@ -601,12 +655,12 @@
 
             <p>Previendo la inminente aparición de los refuerzos, los inmortales decidieron adelantar su siguiente fase. Intentaron por primera vez quitarle la inmortalidad a un combatiente herido, pero fracasaron rotunda y trágicamente. Los cálculos numéricos eran correctos, pero su hipótesis de que debilitar al portador favorecería el proceso fue errónea. El núcleo del inmortal, al encontrarse debilitado, era sumamente sensible y propenso a la sobrecarga, rompiendo la estabilidad interna de su propia esencia. Esto desató un efecto totalmente inesperado: si bien lograba arrebatarles la inmortalidad, también sumía al usuario en un estado de cansancio perpetuo, transmitiendo un sufrimiento similar al de una muerte lenta que jamás terminaba de consumarse. Ante este peligro, los mortales cambiaron su estrategia por completo: destinaron a casi todo su personal a mantener cautivos a los inmortales restantes en un estado saludable y estable, mientras un pequeño grupo de élite se encargaba de interrogar e investigar a <strong>Maci_Hq</strong> para forzarlo a detener el avance de los héroes.</p>
 
-            <p>Por su parte, los héroes ya habían encontrado solución a múltiples problemáticas en el <strong>Reino Cósmico</strong>, pero al ser notificados de la situación cambiaron drásticamente sus tácticas. Iniciaron una mejora apresurada en las defensas del <strong>Reino Cósmico</strong>, conscientes de que durante los eventos de <strong>Final Paradox</strong> sufrieron numerosas bajas y ahora ellos se erigían como los protectores principales. Aunque era poco probable que algún invasor lograra tomar el control, la certeza de que una amenaza había iniciado una caza sistemática en el <strong>Universo Minecraft</strong> los obligó a blindar el reino y sus artefactos más preciados. Dejaron sus armas especiales resguardadas allí, pues conocían el riesgo de perder la batalla y no podían permitir que semejante poder cayera en manos equivocadas. Emprendieron el viaje y, aunque el traslado entre universos tomó más tiempo del esperado, al llegar solo se toparon con un caos inminente. Se prepararon para librar una guerra total que al final nunca ocurrió: los soldados enemigos se retiraron de repente y el plan de los efímeros se puso en marcha. Juntaron a todos los mortales y lanzaron su ataque definitivo; el cielo entero se enrojeció y, en un fulminante haz de luz, los inmortales perdieron por fin su bien más preciado. El final había llegado: el líder de los efímeros dio inicio a su macabro juego, el <strong class="palabra-odio-glitch">DEATHMATCH</strong>.</p>
+            <p>Por su parte, los héroes ya habían encontrado solución a múltiples problemáticas en el <strong>Reino Cósmico</strong>, pero al ser notificados de la situación cambiaron drásticamente sus tácticas. Iniciaron una mejora apresurada en las defensas del <strong>Reino Cósmico</strong>, conscientes de que durante los eventos de <strong>Final Paradox</strong> sufrieron numerosas bajas y ahora ellos se erigían como los protectores principales. Aunque era poco probable que algún invasor lograra tomar el control, la certeza de que una amenaza había iniciado una caza sistemática en el <strong>Universo Minecraft</strong> los obligó a blindar el reino y sus artefactos más preciados. Dejaron sus armas especiales resguardadas allí, pues conocían el riesgo de perder la batalla y no می‌توان permitir que semejante poder cayera en manos equivocadas. Emprendieron el viaje y, aunque el traslado entre universos tomó más tiempo del esperado, al llegar solo se toparon con un caos inminente. Se prepararon para librar una guerra total que al final nunca ocurrió: los soldados enemigos se retiraron de repente y el plan de los efímeros se puso en marcha. Juntaron a todos los mortales y lanzaron su ataque definitivo; el cielo entero se enrojeció y, en un fulminante haz de luz, los inmortales perdieron por fin su bien más preciado. El final había llegado: el líder de los efímeros dio inicio a su macabro juego, el <strong class="palabra-odio-glitch">DEATHMATCH</strong>.</p>
         </section>
 
         <!-- Sección posterior al fin: Especies e Inmortales -->
         <img src="https://i.imgur.com/QPAkumE.png" alt="Especies" class="img-titulo-especies" id="anclaEspecies">
-        <img src="https://i.imgur.com/cG1slXx.png" alt="Inmortales" class="img-titulo-inmortales">
+        <img src="https://i.imgur.com/cG1slXx.png" alt="Inmortales" class="img-titulo-inmortales" id="anclaInmortales">
 
         <div class="contenedor-inmortales">
             <section class="panel-inmortales bloque-texto texto-final" id="textoAnimadoInmortales">
@@ -614,14 +668,47 @@
             </section>
             <img src="https://i.imgur.com/NgYo8NB.png" alt="Ilustración Inmortales" class="img-lateral-inmortales">
         </div>
+
+        <!-- Nueva Sección: Mortales -->
+        <img src="https://i.imgur.com/0KedJu2.png" alt="Mortales" class="img-titulo-mortales" id="anclaMortales">
+
+        <div class="contenedor-mortales">
+            <section class="panel-mortales bloque-texto texto-final" id="textoAnimadoMortales">
+                <p>Los mortales son los habitantes del <strong>Universo Efímero</strong>, tienen una vida limitada y no pueden volver de la muerte. Además de eso, su universo no tiene protección contra los cambios temporales, así que se ven afectados ante esta problemática. Todavía no conocen ningún habitante de este universo.</p>
+            </section>
+            <img src="https://i.imgur.com/MEu1y81.png" alt="Ilustración Mortales" class="img-lateral-mortales">
+        </div>
     </main>
 
     <!-- Logo Maci Hq Studios -->
     <img src="https://i.imgur.com/tPcG0ge.png" alt="Maci HQ Studios Logo" class="logo-2">
 
-    <!-- Script de animación y fundido gradual del fondo -->
+    <!-- Script de animación, generación de estrellas y fundido gradual del fondo -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Generar estrellas reales dinámicamente en el contenedor
+            const containerEstrellas = document.getElementById('estrellasContainer');
+            if (containerEstrellas) {
+                const cantidadEstrellas = 75;
+                for (let i = 0; i < cantidadEstrellas; i++) {
+                    const estrella = document.createElement('div');
+                    estrella.className = 'estrella';
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const tamano = Math.random() * 2 + 1; // 1px a 3px
+                    const duracion = (Math.random() * 3 + 2).toFixed(2); // 2s a 5s
+
+                    estrella.style.left = `${posX}%`;
+                    estrella.style.top = `${posY}%`;
+                    estrella.style.width = `${tamano}px`;
+                    estrella.style.height = `${tamano}px`;
+                    estrella.style.setProperty('--duracion', `${duracion}s`);
+                    estrella.style.animationDelay = `${(Math.random() * 3).toFixed(2)}s`;
+
+                    containerEstrellas.appendChild(estrella);
+                }
+            }
+
             function animarTexto(idContenedor, claseChispaNormal) {
                 const contenedor = document.getElementById(idContenedor);
                 if (!contenedor) return;
@@ -687,17 +774,20 @@
             animarTexto('textoAnimado3', 'palabra-chispa-celeste');
             animarTexto('textoAnimado4', 'palabra-chispa-blanca');
             animarTexto('textoAnimadoInmortales', 'palabra-chispa-celeste');
+            animarTexto('textoAnimadoMortales', 'palabra-chispa-roja');
 
             // Transición gradual de fondo basada en el desplazamiento (Scroll)
             const capaMorada = document.getElementById('capaMorada');
             const capaCeleste = document.getElementById('capaCeleste');
             const capaBlanca = document.getElementById('capaBlanca');
             const capaEspecies = document.getElementById('capaEspecies');
+            const capaMortales = document.getElementById('capaMortales');
 
             const imgHistoria = document.getElementById('anclaHistoria');
             const imgAmenaza = document.getElementById('anclaAmenaza');
             const imgFinal = document.getElementById('anclaFinal');
             const imgEspecies = document.getElementById('anclaEspecies');
+            const imgMortales = document.getElementById('anclaMortales');
 
             window.addEventListener('scroll', () => {
                 const windowHeight = window.innerHeight;
@@ -763,7 +853,25 @@
                     const end = windowHeight * 0.2;
                     let progEspecies = (start - rect.top) / (start - end);
                     progEspecies = Math.max(0, Math.min(1, progEspecies));
+
+                    if (imgMortales) {
+                        const rectMortales = imgMortales.getBoundingClientRect();
+                        if (rectMortales.top < windowHeight) {
+                            let progSalidaEspecies = (windowHeight - rectMortales.top) / windowHeight;
+                            progEspecies = Math.max(0, progEspecies - progSalidaEspecies);
+                        }
+                    }
                     capaEspecies.style.opacity = progEspecies;
+                }
+
+                // 5. Control de fundido a Rojo Oscuro - Rojo (Mortales)
+                if (imgMortales && capaMortales) {
+                    const rect = imgMortales.getBoundingClientRect();
+                    const start = windowHeight * 0.8;
+                    const end = windowHeight * 0.2;
+                    let progMortales = (start - rect.top) / (start - end);
+                    progMortales = Math.max(0, Math.min(1, progMortales));
+                    capaMortales.style.opacity = progMortales;
                 }
             });
         });
@@ -771,3 +879,8 @@
 
 </body>
 </html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+print("index.html actualizado exitosamente.")
