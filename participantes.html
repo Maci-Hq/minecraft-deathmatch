@@ -140,6 +140,7 @@
             flex-direction: column;
             align-items: center;
             gap: 8px;
+            position: relative;
         }
 
         /* Marco cuadrado para la imagen */
@@ -153,6 +154,7 @@
             justify-content: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
             overflow: hidden;
+            position: relative;
         }
 
         .cuadro-img img {
@@ -166,6 +168,31 @@
             font-size: 1.5rem;
             color: #777777;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Tooltip al apoyar el cursor en la casilla */
+        .tooltip-box {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            background-color: rgba(0, 0, 0, 0.85);
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .card-participante:hover .tooltip-box {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         /* Nombre del participante */
@@ -223,7 +250,6 @@
                 margin-bottom: 25px;
             }
 
-            /* Cambiamos la cuadrícula a 2 o 3 columnas en celulares para que se aprecie bien */
             .grid-participantes {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px 15px;
@@ -268,7 +294,7 @@
 
         <!-- Cuadrícula de 25 Participantes -->
         <div class="grid-participantes" id="gridParticipantes">
-            <!-- Se generará por estructura limpia en HTML -->
+            <!-- Se generará dinámicamente -->
         </div>
     </main>
 
@@ -280,10 +306,13 @@
         const grid = document.getElementById('gridParticipantes');
         const totalParticipantes = 25;
 
-        // Datos para los primeros participantes configurados
-        const participantesActivos = {
-            1: { nombre: "Maci_Hq", img: "https://media.tenor.com/FTl-aQrnxmoAAAAe/mecha-mecha-pollo.png" },
-            2: { nombre: "RamaWM29", img: "https://i.imgur.com/4TQxjxu.png" }
+        /* 
+          Configuración para cada participante.
+          - Para importar una imagen en el futuro, solo añade aquí su número, nombre, url de imagen y estado ("vivo", "muerto", "test", etc.).
+        */
+        const participantesConfig = {
+            1: { nombre: "Maci_Hq", img: "https://i.imgur.com/O2S1UjA.png", estado: "vivo" },
+            2: { nombre: "RamaWM29", img: "https://i.imgur.com/4TQxjxu.png", estado: "vivo" }
         };
 
         for (let i = 1; i <= totalParticipantes; i++) {
@@ -293,29 +322,41 @@
             const cuadro = document.createElement('div');
             cuadro.className = 'cuadro-img';
 
-            if (participantesActivos[i]) {
-                // Participante activo con imagen y nombre
+            // Tooltip individual al pasar el cursor
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip-box';
+            
+            const participante = participantesConfig[i];
+
+            if (participante && participante.img) {
+                // Participante con imagen asignada
                 const img = document.createElement('img');
-                img.src = participantesActivos[i].img;
-                img.alt = participantesActivos[i].nombre;
+                img.src = participante.img;
+                img.alt = participante.nombre;
                 cuadro.appendChild(img);
 
                 const nombre = document.createElement('span');
                 nombre.className = 'nombre-participante';
-                nombre.textContent = participantesActivos[i].nombre;
+                nombre.textContent = participante.nombre;
+
+                tooltip.textContent = participante.estado || "vivo";
 
                 card.appendChild(cuadro);
+                card.appendChild(tooltip);
                 card.appendChild(nombre);
             } else {
-                // Espacio en progreso (WIP)
+                // Casilla vacía / en progreso (WIP) lista para importar imagen en el futuro
                 cuadro.classList.add('cuadro-wip');
                 cuadro.textContent = i;
 
                 const nombre = document.createElement('span');
                 nombre.className = 'nombre-participante';
-                nombre.textContent = "Nombre";
+                nombre.textContent = participante && participante.nombre ? participante.nombre : "Nombre";
+
+                tooltip.textContent = participante && participante.estado ? participante.estado : "test";
 
                 card.appendChild(cuadro);
+                card.appendChild(tooltip);
                 card.appendChild(nombre);
             }
 
