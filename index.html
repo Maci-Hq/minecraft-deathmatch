@@ -39,11 +39,11 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(180deg, #660000 0%, #1a0000 40%, #000000 80%);
-            z-index: -4;
+            z-index: -5;
             pointer-events: none;
         }
 
-        /* Capa intermedia 1: Fondo Morado (Primera historia) con opacidad dinámica */
+        /* Capa intermedia 1: Fondo Morado (Primera historia) */
         .fondo-morado-capa {
             content: '';
             position: fixed;
@@ -52,13 +52,13 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(180deg, #330033 0%, #11001a 40%, #000000 80%);
-            z-index: -3;
+            z-index: -4;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.1s linear;
         }
 
-        /* Capa intermedia 2: Fondo Celeste-Negro (Segunda historia) con opacidad dinámica */
+        /* Capa intermedia 2: Fondo Celeste-Negro (Segunda historia) */
         .fondo-celeste-capa {
             content: '';
             position: fixed;
@@ -67,13 +67,13 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(180deg, #003366 0%, #001a33 40%, #000000 80%);
-            z-index: -2;
+            z-index: -3;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.1s linear;
         }
 
-        /* Capa superior: Fondo Blanco-Negro (Final de la historia) con opacidad dinámica */
+        /* Capa 3: Fondo Blanco-Negro (Final de la historia) */
         .fondo-blanco-capa {
             content: '';
             position: fixed;
@@ -82,6 +82,30 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(180deg, #404040 0%, #1a1a1a 40%, #000000 80%);
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s linear;
+        }
+
+        /* Capa 4: Fondo Azul-Celeste con Estrellas Azules (Sección Especies) */
+        .fondo-especies-capa {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(1.5px 1.5px at 15% 20%, #00bfff 100%, transparent),
+                radial-gradient(2px 2px at 35% 60%, #0099ff 100%, transparent),
+                radial-gradient(1px 1px at 60% 15%, #33ccff 100%, transparent),
+                radial-gradient(2px 2px at 80% 40%, #00bfff 100%, transparent),
+                radial-gradient(1.5px 1.5px at 25% 85%, #0066ff 100%, transparent),
+                radial-gradient(2px 2px at 70% 80%, #3388ff 100%, transparent),
+                radial-gradient(1px 1px at 50% 45%, #00ffff 100%, transparent),
+                linear-gradient(180deg, #001133 0%, #002244 40%, #00081a 80%);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
             z-index: -1;
             pointer-events: none;
             opacity: 0;
@@ -159,7 +183,7 @@
         }
 
         /* Imágenes de título de las secciones (Tamaño reducido a 320px) */
-        .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies, .img-titulo-inmortales {
+        .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies {
             max-width: 320px;
             width: 80%;
             height: auto;
@@ -169,9 +193,15 @@
             animation: pulsoDorado 3s ease-in-out infinite alternate;
         }
 
-        /* Ajuste específico para que Especies e Inmortales vayan juntas sin tanta separación */
+        /* Imagen de Inmortales con Brillo Celeste */
         .img-titulo-inmortales {
+            max-width: 320px;
+            width: 80%;
+            height: auto;
+            margin-bottom: 45px;
             margin-top: 15px;
+            object-fit: contain;
+            animation: pulsoCelesteInmortales 3s ease-in-out infinite alternate;
         }
 
         @keyframes pulsoDorado {
@@ -182,6 +212,17 @@
             100% {
                 transform: scale(1.05);
                 filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.85));
+            }
+        }
+
+        @keyframes pulsoCelesteInmortales {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.4));
+            }
+            100% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 22px rgba(0, 204, 255, 0.9));
             }
         }
 
@@ -281,7 +322,7 @@
             }
         }
 
-        /* Brillo blanco REFORZADO para que resalte fuertemente en el final */
+        /* Brillo blanco REFORZADO */
         .palabra-chispa-blanca {
             animation: palabraAparece 0.35s ease-out forwards, brilloBlancoIntenso 1.5s ease-out forwards;
         }
@@ -305,7 +346,7 @@
             }
         }
 
-        /* Efecto especial para la palabra "ODIO" y "DEATHMATCH" (Glitch en rojo) */
+        /* Efecto especial "ODIO" y "DEATHMATCH" (Glitch en rojo) */
         .palabra-odio-glitch {
             display: inline-block;
             opacity: 0;
@@ -351,7 +392,7 @@
             }
         }
 
-        /* Efecto rojo idéntico al de bienvenida para "Quitarles la inmortalidad" */
+        /* Efecto rojo para "Quitarles la inmortalidad" */
         .palabra-inmortalidad-roja {
             display: inline-block;
             opacity: 0;
@@ -373,7 +414,7 @@
         .texto-amenaza strong { color: #4dd2ff; }
         .texto-final strong { color: #ffffff; }
 
-        /* Estilo para la sección de Inmortales con panel y imagen a la derecha */
+        /* Estilo para la sección de Inmortales con panel e imagen a la derecha */
         .contenedor-inmortales {
             width: 100%;
             display: flex;
@@ -385,10 +426,10 @@
         .panel-inmortales {
             flex: 1;
             background-color: rgba(0, 0, 0, 0.6);
-            border: 2px solid #ffffff;
+            border: 2px solid #00c3ff;
             border-radius: 6px;
             padding: 35px 40px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.85);
+            box-shadow: 0 0 15px rgba(0, 195, 255, 0.3);
         }
 
         .img-lateral-inmortales {
@@ -397,7 +438,7 @@
             height: auto;
             object-fit: contain;
             border-radius: 6px;
-            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+            filter: drop-shadow(0 0 12px rgba(0, 204, 255, 0.5));
         }
 
         /* Logo 2 (Abajo a la derecha) */
@@ -489,6 +530,7 @@
     <div class="fondo-morado-capa" id="capaMorada"></div>
     <div class="fondo-celeste-capa" id="capaCeleste"></div>
     <div class="fondo-blanco-capa" id="capaBlanca"></div>
+    <div class="fondo-especies-capa" id="capaEspecies"></div>
 
     <!-- Encabezado superior con Logo y Botones -->
     <header>
@@ -550,14 +592,14 @@
         </section>
 
         <!-- Sección posterior al fin: Especies e Inmortales -->
-        <img src="https://i.imgur.com/QPAkumE.png" alt="Especies" class="img-titulo-especies">
-        <img src="https://i.imgur.com/cG1slXx.png" alt="Inmortales" class="img-titulo-inmortales">
+        <img src="https://i.imgur.com/IMAGEN_ESPECIES_AQUI.png" alt="Especies" class="img-titulo-especies" id="anclaEspecies">
+        <img src="https://i.imgur.com/IMAGEN_INMORTALES_AQUI.png" alt="Inmortales" class="img-titulo-inmortales">
 
         <div class="contenedor-inmortales">
             <section class="panel-inmortales bloque-texto texto-final" id="textoAnimadoInmortales">
                 <p>Los inmortales son seres que conforman el <strong>Universo Minecraft</strong>, su principal característica es que al morir reviven en su punto de spawn retrocediendo el tiempo ligeramente. Aunque eso no lo notan porque su universo es resistente y no es afectado por ese retroceso. Un ejemplo de inmortales serian <strong>Maci_Hq</strong> o <strong>RamaWM29</strong>.</p>
             </section>
-            <img src="https://i.imgur.com/NgYo8NB.png" alt="Ilustración Inmortales" class="img-lateral-inmortales">
+            <img src="https://i.imgur.com/IMAGEN_LATERAL_AQUI.png" alt="Ilustración Inmortales" class="img-lateral-inmortales">
         </div>
     </main>
 
@@ -631,15 +673,18 @@
             animarTexto('textoAnimado2', 'palabra-chispa-morada');
             animarTexto('textoAnimado3', 'palabra-chispa-celeste');
             animarTexto('textoAnimado4', 'palabra-chispa-blanca');
-            animarTexto('textoAnimadoInmortales', 'palabra-chispa-blanca');
+            animarTexto('textoAnimadoInmortales', 'palabra-chispa-celeste');
 
             // Transición gradual de fondo basada en el desplazamiento (Scroll)
             const capaMorada = document.getElementById('capaMorada');
             const capaCeleste = document.getElementById('capaCeleste');
             const capaBlanca = document.getElementById('capaBlanca');
+            const capaEspecies = document.getElementById('capaEspecies');
+
             const imgHistoria = document.getElementById('anclaHistoria');
             const imgAmenaza = document.getElementById('anclaAmenaza');
             const imgFinal = document.getElementById('anclaFinal');
+            const imgEspecies = document.getElementById('anclaEspecies');
 
             window.addEventListener('scroll', () => {
                 const windowHeight = window.innerHeight;
@@ -687,7 +732,25 @@
                     const end = windowHeight * 0.2;
                     let progBlanco = (start - rect.top) / (start - end);
                     progBlanco = Math.max(0, Math.min(1, progBlanco));
+
+                    if (imgEspecies) {
+                        const rectEspecies = imgEspecies.getBoundingClientRect();
+                        if (rectEspecies.top < windowHeight) {
+                            let progSalidaBlanca = (windowHeight - rectEspecies.top) / windowHeight;
+                            progBlanco = Math.max(0, progBlanco - progSalidaBlanca);
+                        }
+                    }
                     capaBlanca.style.opacity = progBlanco;
+                }
+
+                // 4. Control de fundido a Azul-Celeste con Estrellas (Especies)
+                if (imgEspecies && capaEspecies) {
+                    const rect = imgEspecies.getBoundingClientRect();
+                    const start = windowHeight * 0.8;
+                    const end = windowHeight * 0.2;
+                    let progEspecies = (start - rect.top) / (start - end);
+                    progEspecies = Math.max(0, Math.min(1, progEspecies));
+                    capaEspecies.style.opacity = progEspecies;
                 }
             });
         });
