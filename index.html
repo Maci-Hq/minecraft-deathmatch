@@ -257,27 +257,34 @@
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
         }
 
-        /* Flechas de navegación lateral */
+        /* Flechas de navegación con imágenes */
         .btn-nav-arrow {
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 2px solid #ffffff;
-            color: #ffffff;
-            width: 32px;
-            height: 38px;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 1.2rem;
             flex-shrink: 0;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            user-select: none;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .btn-arrow-img {
+            display: block;
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            transform: scaleX(-1);
+        }
+
+        #scrollRightBtn .btn-arrow-img {
+            transform: scaleX(1);
         }
 
         .btn-nav-arrow:hover {
-            background-color: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+            transform: scale(1.06);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
         }
 
         /* Contenedor principal */
@@ -731,7 +738,7 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Interfaz de Detalle (Referencia 2) con imagen dedicada distinta */
+        /* Interfaz de Detalle con imagen dedicada distinta */
         .universo-detalle {
             position: absolute;
             top: 0;
@@ -856,10 +863,8 @@
                 height: 28px;
             }
 
-            .btn-nav-arrow {
-                width: 28px;
+            .btn-arrow-img {
                 height: 28px;
-                font-size: 1rem;
             }
 
             main {
@@ -934,7 +939,9 @@
         <a href="index.html"><img src="https://i.imgur.com/eSClUmH.png" alt="Minecraft Deathmatch Logo" class="logo-1"></a>
         
         <div class="nav-container-wrapper">
-            <button class="btn-nav-arrow" id="scrollLeftBtn">❮</button>
+            <button class="btn-nav-arrow" id="scrollLeftBtn">
+                <img src="https://i.imgur.com/BmuM8tb.png" alt="Anterior" class="btn-arrow-img">
+            </button>
             <nav class="nav-botones" id="navBotonesContainer">
                 <a href="participantes.html"><img src="https://i.imgur.com/BmuM8tb.png" alt="Participantes" class="btn-nav"></a>
                 <a href="cambios.html"><img src="https://i.imgur.com/PrP3vfI.png" alt="Cambios" class="btn-nav"></a>
@@ -943,7 +950,9 @@
                 <a href="noticias.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Noticias" class="btn-nav"></a>
                 <a href="formulario.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Formulario" class="btn-nav"></a>
             </nav>
-            <button class="btn-nav-arrow" id="scrollRightBtn">❯</button>
+            <button class="btn-nav-arrow" id="scrollRightBtn">
+                <img src="https://i.imgur.com/BmuM8tb.png" alt="Siguiente" class="btn-arrow-img">
+            </button>
         </div>
     </header>
 
