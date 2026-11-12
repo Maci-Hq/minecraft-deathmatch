@@ -66,13 +66,30 @@
             margin-bottom: 4px;
         }
 
-        /* Contenedor de los botones superior */
+        /* Contenedor con flechas para navegación superior */
+        .nav-container-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 30px;
+            position: relative;
+            max-width: calc(100vw - 200px);
+        }
+
         .nav-botones {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-left: 40px;
             flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            padding: 4px 2px;
+        }
+
+        .nav-botones::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
         }
 
         .btn-nav {
@@ -84,10 +101,41 @@
             will-change: transform, filter;
             transform: translateZ(0);
             transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), filter 0.25s ease;
+            flex-shrink: 0;
         }
 
         .btn-nav:hover {
             transform: scale(1.06) translateZ(0);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+        }
+
+        /* Flechas de navegación con imágenes */
+        .btn-nav-arrow {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .btn-arrow-img {
+            display: block;
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            transform: scaleX(-1);
+        }
+
+        #scrollRightBtn .btn-arrow-img {
+            transform: scaleX(1);
+        }
+
+        .btn-nav-arrow:hover {
+            transform: scale(1.06);
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
         }
 
@@ -230,14 +278,22 @@
                 margin-bottom: 5px;
             }
 
-            .nav-botones {
+            .nav-container-wrapper {
                 margin-left: 0;
-                gap: 8px;
-                flex-wrap: wrap;
+                width: 100%;
+                max-width: 100%;
                 justify-content: center;
             }
 
+            .nav-botones {
+                gap: 8px;
+            }
+
             .btn-nav {
+                height: 28px;
+            }
+
+            .btn-arrow-img {
                 height: 28px;
             }
 
@@ -278,13 +334,22 @@
     <header>
         <a href="index.html"><img src="https://i.imgur.com/eSClUmH.png" alt="Minecraft Deathmatch Logo" class="logo-1"></a>
         
-        <nav class="nav-botones">
-            <!-- Botón Participantes activo/seleccionado -->
-            <a href="participantes.html"><img src="https://i.imgur.com/BmuM8tb.png" alt="Participantes" class="btn-nav"></a>
-            <a href="cambios.html"><img src="https://i.imgur.com/PrP3vfI.png" alt="Cambios" class="btn-nav"></a>
-            <a href="descargas.html"><img src="https://i.imgur.com/wQSTFtZ.png" alt="Descargas" class="btn-nav"></a>
-            <a href="contribuidores.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Contribuidores" class="btn-nav"></a>
-        </nav>
+        <div class="nav-container-wrapper">
+            <button class="btn-nav-arrow" id="scrollLeftBtn">
+                <img src="https://i.imgur.com/3uwNBoU.png" alt="Anterior" class="btn-arrow-img">
+            </button>
+            <nav class="nav-botones" id="navBotonesContainer">
+                <a href="participantes.html"><img src="https://i.imgur.com/BmuM8tb.png" alt="Participantes" class="btn-nav"></a>
+                <a href="cambios.html"><img src="https://i.imgur.com/PrP3vfI.png" alt="Cambios" class="btn-nav"></a>
+                <a href="descargas.html"><img src="https://i.imgur.com/wQSTFtZ.png" alt="Descargas" class="btn-nav"></a>
+                <a href="contribuidores.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Contribuidores" class="btn-nav"></a>
+                <a href="noticias.html"><img src="https://i.imgur.com/g70yWIb.png" alt="Noticias" class="btn-nav"></a>
+                <a href="formulario.html"><img src="https://i.imgur.com/cX0u9UH.png" alt="Formulario" class="btn-nav"></a>
+            </nav>
+            <button class="btn-nav-arrow" id="scrollRightBtn">
+                <img src="https://i.imgur.com/3uwNBoU.png" alt="Siguiente" class="btn-arrow-img">
+            </button>
+        </div>
     </header>
 
     <!-- Área de contenido principal -->
@@ -301,67 +366,76 @@
     <!-- Logo Maci Hq Studios -->
     <img src="https://i.imgur.com/tPcG0ge.png" alt="Maci HQ Studios Logo" class="logo-2">
 
-    <!-- Script para generar los 25 espacios de participantes automáticamente -->
+    <!-- Script para el desplazamiento lateral de los botones con las flechas y generación de participantes -->
     <script>
-        const grid = document.getElementById('gridParticipantes');
-        const totalParticipantes = 25;
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lógica de desplazamiento con flechas para la barra de navegación superior
+            const navContainer = document.getElementById('navBotonesContainer');
+            const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+            const scrollRightBtn = document.getElementById('scrollRightBtn');
 
-        /* 
-          Configuración para cada participante.
-          - Para importar una imagen en el futuro, solo añade aquí su número, nombre, url de imagen y estado ("vivo", "muerto", "test", etc.).
-        */
-        const participantesConfig = {
-            1: { nombre: "Maci_Hq", img: "https://i.imgur.com/O2S1UjA.png", estado: "vivo" },
-            2: { nombre: "RamaWM29", img: "https://i.imgur.com/4TQxjxu.png", estado: "vivo" }
-        };
-
-        for (let i = 1; i <= totalParticipantes; i++) {
-            const card = document.createElement('div');
-            card.className = 'card-participante';
-
-            const cuadro = document.createElement('div');
-            cuadro.className = 'cuadro-img';
-
-            // Tooltip individual al pasar el cursor
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip-box';
-            
-            const participante = participantesConfig[i];
-
-            if (participante && participante.img) {
-                // Participante con imagen asignada
-                const img = document.createElement('img');
-                img.src = participante.img;
-                img.alt = participante.nombre;
-                cuadro.appendChild(img);
-
-                const nombre = document.createElement('span');
-                nombre.className = 'nombre-participante';
-                nombre.textContent = participante.nombre;
-
-                tooltip.textContent = participante.estado || "vivo";
-
-                card.appendChild(cuadro);
-                card.appendChild(tooltip);
-                card.appendChild(nombre);
-            } else {
-                // Casilla vacía / en progreso (WIP) lista para importar imagen en el futuro
-                cuadro.classList.add('cuadro-wip');
-                cuadro.textContent = i;
-
-                const nombre = document.createElement('span');
-                nombre.className = 'nombre-participante';
-                nombre.textContent = participante && participante.nombre ? participante.nombre : "Nombre";
-
-                tooltip.textContent = participante && participante.estado ? participante.estado : "test";
-
-                card.appendChild(cuadro);
-                card.appendChild(tooltip);
-                card.appendChild(nombre);
+            if (navContainer && scrollLeftBtn && scrollRightBtn) {
+                scrollLeftBtn.addEventListener('click', () => {
+                    navContainer.scrollBy({ left: -200, behavior: 'smooth' });
+                });
+                scrollRightBtn.addEventListener('click', () => {
+                    navContainer.scrollBy({ left: 200, behavior: 'smooth' });
+                });
             }
 
-            grid.appendChild(card);
-        }
+            const grid = document.getElementById('gridParticipantes');
+            const totalParticipantes = 25;
+
+            const participantesConfig = {
+                1: { nombre: "Maci_Hq", img: "https://i.imgur.com/O2S1UjA.png", estado: "vivo" },
+                2: { nombre: "RamaWM29", img: "https://i.imgur.com/4TQxjxu.png", estado: "vivo" }
+            };
+
+            for (let i = 1; i <= totalParticipantes; i++) {
+                const card = document.createElement('div');
+                card.className = 'card-participante';
+
+                const cuadro = document.createElement('div');
+                cuadro.className = 'cuadro-img';
+
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip-box';
+                
+                const participante = participantesConfig[i];
+
+                if (participante && participante.img) {
+                    const img = document.createElement('img');
+                    img.src = participante.img;
+                    img.alt = participante.nombre;
+                    cuadro.appendChild(img);
+
+                    const nombre = document.createElement('span');
+                    nombre.className = 'nombre-participante';
+                    nombre.textContent = participante.nombre;
+
+                    tooltip.textContent = participante.estado || "vivo";
+
+                    card.appendChild(cuadro);
+                    card.appendChild(tooltip);
+                    card.appendChild(nombre);
+                } else {
+                    cuadro.classList.add('cuadro-wip');
+                    cuadro.textContent = i;
+
+                    const nombre = document.createElement('span');
+                    nombre.className = 'nombre-participante';
+                    nombre.textContent = participante && participante.nombre ? participante.nombre : "Nombre";
+
+                    tooltip.textContent = participante && participante.estado ? participante.estado : "test";
+
+                    card.appendChild(cuadro);
+                    card.appendChild(tooltip);
+                    card.appendChild(nombre);
+                }
+
+                grid.appendChild(card);
+            }
+        });
     </script>
 
 </body>
