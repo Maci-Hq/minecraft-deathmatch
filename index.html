@@ -214,13 +214,30 @@
             margin-bottom: 4px;
         }
 
-        /* Contenedor de los botones superior */
+        /* Contenedor con flechas para navegación superior */
+        .nav-container-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 30px;
+            position: relative;
+            max-width: calc(100vw - 200px);
+        }
+
         .nav-botones {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-left: 40px;
             flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            padding: 4px 2px;
+        }
+
+        .nav-botones::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
         }
 
         .btn-nav {
@@ -232,11 +249,60 @@
             will-change: transform, filter;
             transform: translateZ(0);
             transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), filter 0.25s ease;
+            flex-shrink: 0;
         }
 
         .btn-nav:hover {
             transform: scale(1.06) translateZ(0);
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+        }
+
+        /* Botón de texto estilo Minecraft para Noticias y Formulario */
+        .btn-nav-texto {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 38px;
+            padding: 0 16px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.6);
+            transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-nav-texto:hover {
+            transform: scale(1.06);
+            background-color: rgba(50, 50, 50, 0.9);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+        }
+
+        /* Flechas de navegación lateral */
+        .btn-nav-arrow {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            width: 32px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            user-select: none;
+        }
+
+        .btn-nav-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
         }
 
         /* Contenedor principal */
@@ -707,6 +773,7 @@
             z-index: 3;
             background: radial-gradient(circle at center, #050510 0%, #000000 90%);
             padding: 40px;
+            overflow-y: auto;
         }
 
         .universo-detalle.activo {
@@ -799,15 +866,31 @@
                 margin-bottom: 5px;
             }
 
-            .nav-botones {
+            .nav-container-wrapper {
                 margin-left: 0;
-                gap: 8px;
-                flex-wrap: wrap;
+                width: 100%;
+                max-width: 100%;
                 justify-content: center;
+            }
+
+            .nav-botones {
+                gap: 8px;
             }
 
             .btn-nav {
                 height: 28px;
+            }
+
+            .btn-nav-texto {
+                height: 32px;
+                font-size: 0.8rem;
+                padding: 0 10px;
+            }
+
+            .btn-nav-arrow {
+                width: 28px;
+                height: 32px;
+                font-size: 1rem;
             }
 
             main {
@@ -848,63 +931,8 @@
             }
 
             .panel-universos-grande {
-                height: 420px;
+                height: 300px;
             }
-
-            .universo-detalle {
-                padding: 15px;
-                align-items: flex-start;
-                justify-content: flex-start;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .btn-volver-mapa {
-                position: sticky;
-                top: 10px;
-                left: 10px;
-                padding: 6px 12px;
-                font-size: 0.85rem;
-                margin-bottom: 10px;
-                z-index: 10;
-            }
-
-            .detalle-contenido {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-                margin-top: 5px;
-                width: 100%;
-                padding-bottom: 20px;
-            }
-
-            .detalle-imagen-grande {
-                width: 100px;
-                height: 100px;
-            }
-
-            .detalle-texto-contenedor {
-                gap: 8px;
-                width: 100%;
-            }
-
-            .detalle-texto-titulo {
-                font-size: 1.15rem;
-                word-break: break-word;
-            }
-
-            .detalle-texto-desc {
-                font-size: 0.88rem;
-                line-height: 1.5;
-                word-break: break-word;
-                padding: 0 5px;
-            }
-
-            /* Tamaños adaptados de las esferas del mapa en móvil para evitar superposición */
-            .objeto-universo.rojo { width: 50px; height: 50px; }
-            .objeto-universo.morado { width: 65px; height: 65px; }
-            .objeto-universo.celeste { width: 50px; height: 50px; }
-            .objeto-universo.blanco { width: 35px; height: 35px; }
 
             .logo-2 {
                 bottom: 12px;
@@ -932,16 +960,22 @@
         <div id="estrellasUniversosContainer"></div>
     </div>
 
-    <!-- Encabezado superior con Logo y Botones -->
+    <!-- Encabezado superior con Logo y Botones de Navegación con flechas -->
     <header>
         <a href="index.html"><img src="https://i.imgur.com/eSClUmH.png" alt="Minecraft Deathmatch Logo" class="logo-1"></a>
         
-        <nav class="nav-botones">
-            <a href="participantes.html"><img src="https://i.imgur.com/BmuM8tb.png" alt="Participantes" class="btn-nav"></a>
-            <a href="cambios.html"><img src="https://i.imgur.com/PrP3vfI.png" alt="Cambios" class="btn-nav"></a>
-            <a href="descargas.html"><img src="https://i.imgur.com/wQSTFtZ.png" alt="Descargas" class="btn-nav"></a>
-            <a href="contribuidores.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Contribuidores" class="btn-nav"></a>
-        </nav>
+        <div class="nav-container-wrapper">
+            <button class="btn-nav-arrow" id="scrollLeftBtn">❮</button>
+            <nav class="nav-botones" id="navBotonesContainer">
+                <a href="participantes.html"><img src="https://i.imgur.com/BmuM8tb.png" alt="Participantes" class="btn-nav"></a>
+                <a href="cambios.html"><img src="https://i.imgur.com/PrP3vfI.png" alt="Cambios" class="btn-nav"></a>
+                <a href="descargas.html"><img src="https://i.imgur.com/wQSTFtZ.png" alt="Descargas" class="btn-nav"></a>
+                <a href="contribuidores.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Contribuidores" class="btn-nav"></a>
+                <a href="noticias.html" class="btn-nav-texto">Noticias</a>
+                <a href="formulario.html" class="btn-nav-texto">Formulario</a>
+            </nav>
+            <button class="btn-nav-arrow" id="scrollRightBtn">❯</button>
+        </div>
     </header>
 
     <!-- Área de contenido principal -->
@@ -1053,9 +1087,23 @@
     <!-- Logo Maci Hq Studios -->
     <img src="https://i.imgur.com/tPcG0ge.png" alt="Maci HQ Studios Logo" class="logo-2">
 
-    <!-- Script de animación, generación de estrellas y fundido gradual del fondo -->
+    <!-- Script de animación, generación de estrellas, scroll de barra superior y fundido de fondo -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Lógica de desplazamiento con flechas para la barra de navegación superior
+            const navContainer = document.getElementById('navBotonesContainer');
+            const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+            const scrollRightBtn = document.getElementById('scrollRightBtn');
+
+            if (navContainer && scrollLeftBtn && scrollRightBtn) {
+                scrollLeftBtn.addEventListener('click', () => {
+                    navContainer.scrollBy({ left: -200, behavior: 'smooth' });
+                });
+                scrollRightBtn.addEventListener('click', () => {
+                    navContainer.scrollBy({ left: 200, behavior: 'smooth' });
+                });
+            }
+
             // Generar estrellas celestes en Especies
             const containerEstrellas = document.getElementById('estrellasContainer');
             if (containerEstrellas) {
@@ -1251,7 +1299,6 @@
             const detalleDesc = document.getElementById('detalleDesc');
             const detalleImagenGrande = document.getElementById('detalleImagenGrande');
 
-            // Imágenes y descripciones distintas asignadas al hacer click en cada objeto
             const datosUniversos = {
                 detalleRojo: {
                     titulo: "Universo Efímero",
