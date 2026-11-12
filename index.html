@@ -626,4 +626,660 @@
         .objeto-universo {
             position: absolute;
             cursor: pointer;
-            transform: translate(-50%, -
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .objeto-universo.rojo {
+            width: 70px;
+            height: 70px;
+        }
+
+        .objeto-universo.morado {
+            width: 90px;
+            height: 90px;
+        }
+
+        .objeto-universo.celeste {
+            width: 70px;
+            height: 70px;
+        }
+
+        .objeto-universo.blanco {
+            width: 45px;
+            height: 45px;
+        }
+
+        .img-objeto-universo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .objeto-universo:hover .img-objeto-universo {
+            transform: scale(1.12);
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9)) brightness(1.25);
+        }
+
+        /* Tooltip al apoyar el cursor */
+        .tooltip-box {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            background-color: rgba(0, 0, 0, 0.85);
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .objeto-universo:hover .tooltip-box {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Interfaz de Detalle (Referencia 2) con imagen dedicada distinta */
+        .universo-detalle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.05);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 3;
+            background: radial-gradient(circle at center, #050510 0%, #000000 90%);
+            padding: 40px;
+        }
+
+        .universo-detalle.activo {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+        .btn-volver-mapa {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: background 0.2s ease, transform 0.2s ease;
+            z-index: 5;
+        }
+
+        .btn-volver-mapa:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        .detalle-contenido {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            gap: 60px;
+        }
+
+        .detalle-imagen-grande {
+            width: 240px;
+            height: 240px;
+            object-fit: contain;
+            flex-shrink: 0;
+            border-radius: 12px;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .detalle-texto-contenedor {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .detalle-texto-titulo {
+            font-size: 1.8rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .detalle-texto-desc {
+            font-size: 1.15rem;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        /* Logo 2 (Abajo a la derecha) */
+        .logo-2 {
+            position: fixed;
+            bottom: 20px;
+            right: 25px;
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            z-index: 10;
+        }
+
+        /* ========================================================= */
+        /*   ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (SMARTPHONES)       */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-1 {
+                height: 60px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .nav-botones {
+                margin-left: 0;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .btn-nav {
+                height: 28px;
+            }
+
+            main {
+                padding: 25px 20px 100px 20px;
+            }
+
+            .img-bienvenido {
+                max-width: 280px;
+                margin-bottom: 25px;
+            }
+
+            .img-titulo-historia, .img-titulo-amenaza, .img-titulo-final, .img-titulo-especies, .img-titulo-inmortales, .img-titulo-mortales, .img-titulo-universos {
+                max-width: 220px;
+                margin-top: 45px;
+                margin-bottom: 25px;
+            }
+
+            .img-titulo-inmortales, .img-titulo-mortales, .img-titulo-universos {
+                margin-top: 10px;
+            }
+
+            .bloque-texto {
+                font-size: 1rem;
+                line-height: 1.75;
+            }
+
+            .contenedor-inmortales, .contenedor-mortales {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .panel-inmortales, .panel-mortales {
+                padding: 25px 20px;
+            }
+
+            .img-lateral-inmortales, .img-lateral-mortales {
+                max-width: 240px;
+            }
+
+            .panel-universos-grande {
+                height: 380px;
+            }
+
+            .universo-detalle {
+                padding: 15px;
+            }
+
+            .btn-volver-mapa {
+                top: 10px;
+                left: 15px;
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            .detalle-contenido {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                margin-top: 35px;
+            }
+
+            .detalle-imagen-grande {
+                width: 120px;
+                height: 120px;
+            }
+
+            .detalle-texto-titulo {
+                font-size: 1.25rem;
+            }
+
+            .detalle-texto-desc {
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
+
+            .objeto-universo.rojo { width: 50px; height: 50px; }
+            .objeto-universo.morado { width: 65px; height: 65px; }
+            .objeto-universo.celeste { width: 50px; height: 50px; }
+            .objeto-universo.blanco { width: 35px; height: 35px; }
+
+            .logo-2 {
+                bottom: 12px;
+                right: 12px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Capas para los fondos dinámicos con fundido gradual -->
+    <div class="fondo-morado-capa" id="capaMorada"></div>
+    <div class="fondo-celeste-capa" id="capaCeleste"></div>
+    <div class="fondo-blanco-capa" id="capaBlanca"></div>
+    <div class="fondo-especies-capa" id="capaEspecies">
+        <!-- Contenedor dinámico de estrellas -->
+        <div id="estrellasContainer"></div>
+    </div>
+    <div class="fondo-mortales-capa" id="capaMortales">
+        <!-- Contenedor dinámico de estrellas rojas -->
+        <div id="estrellasRojasContainer"></div>
+    </div>
+    <div class="fondo-universos-capa" id="capaUniversos">
+        <div id="estrellasUniversosContainer"></div>
+    </div>
+
+    <!-- Encabezado superior con Logo y Botones -->
+    <header>
+        <a href="index.html"><img src="https://i.imgur.com/eSClUmH.png" alt="Minecraft Deathmatch Logo" class="logo-1"></a>
+        
+        <nav class="nav-botones">
+            <a href="participantes.html"><img src="https://i.imgur.com/BmuM8tb.png" alt="Participantes" class="btn-nav"></a>
+            <a href="cambios.html"><img src="https://i.imgur.com/PrP3vfI.png" alt="Cambios" class="btn-nav"></a>
+            <a href="descargas.html"><img src="https://i.imgur.com/wQSTFtZ.png" alt="Descargas" class="btn-nav"></a>
+            <a href="contribuidores.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Contribuidores" class="btn-nav"></a>
+        </nav>
+    </header>
+
+    <!-- Área de contenido principal -->
+    <main>
+        <!-- Imagen Bienvenido -->
+        <img src="https://i.imgur.com/diArXwO.png" alt="Bienvenido" class="img-bienvenido">
+
+        <!-- Texto principal -->
+        <section class="bloque-texto texto-bienvenido" id="textoAnimado1">
+            <p>Esto es <strong>Minecraft Deathmatch</strong>, un servidor multiplayer en donde la supervivencia es la directriz. Si fuiste invitado ¡Felicidades! Podrás disfrutar de esta hermosa experiencia.</p>
+            
+            <p>El servidor se basa en un clásico minecraft hardcore, pero con cambios diarios, esto para hacer la experiencia más complicada. Competirás en un mundo difícil lleno de 25 jugadores compitiendo por ganar el premio. Oh, claro, ¿Cuál es el premio? El premio, mi querido amigo, son <strong>$50.000</strong>, increíble, ¿No? No te confíes, no será fácil, pues además de sobrevivir tendrás que pelear contra los demás jugadores en el <strong>DEATHMATCH</strong>, un Free For All básicamente.</p>
+            
+            <p>No tengo mucho más que decir, en esta página encontrarás todo lo que necesitas saber sobre este proyecto. Gracias por leer y disfruta de Minecraft Deathmatch.</p>
+        </section>
+
+        <!-- Apartado 1: Historia -->
+        <img src="https://i.imgur.com/cuTcV5m.png" alt="Historia del Servidor" class="img-titulo-historia" id="anclaHistoria">
+
+        <section class="bloque-texto texto-historia" id="textoAnimado2">
+            <p>Esta historia se ubica tiempo después de Final Paradox, una aventura en donde <strong>Maci_Hq</strong>, acompañado de tres grandes héroes llamados <strong>RamaWM29</strong>, <strong>Roylm28</strong> y <strong>P4nadero</strong>, fue llevado a otra dimensión por Thar Kroo y se embarcó en una odisea a través del Reino Cósmico para enfrentar al Conquistador. Los héroes lograron traer la paz al reino cósmico tras reunir los 15 núcleos cósmicos y, con ayuda de Koros el archivista, superaron al Conquistador venciéndolo en un último combate final.</p>
+
+            <p>Aunque los héroes pensaron que este era el final, esto estaba lejos de terminar; el Reino Cósmico aún estaba siendo perturbado por una criatura mucho peor que el Conquistador. <strong>Marau'Thar</strong>, un ser mucho más ancestral que el Conquistador, está intentando liberarse de una vez por todas. Este ser planteó un desafío mucho mayor a nuestros héroes, los cuales tuvieron que pelear con <strong>Marau'Thar - La Pesadilla del Tiempo</strong>. A pesar de la victoria de los héroes, la Pesadilla del Tiempo escapó y se liberó. <strong>Marau'Thar</strong> les planteó su última prueba: los héroes se tenían que enfrentar a <strong>La Furia del Conquistador</strong>, una versión del Conquistador con el poder de <strong>Marau'Thar</strong> y el Núcleo Cósmico de la Pesadilla (una combinación retorcida de los 15 núcleos cósmicos). Después de una ardua batalla, los héroes salieron victoriosos, salvando al Reino Cósmico de los peores males imaginables.</p>
+        </section>
+
+        <!-- Apartado 2: La Nueva Amenaza -->
+        <img src="https://i.imgur.com/UcBzRy2.png" alt="La Nueva Amenaza" class="img-titulo-amenaza" id="anclaAmenaza">
+
+        <section class="bloque-texto texto-amenaza" id="textoAnimado3">
+            <p>Después de esta odisea, los héroes se quedaron en el <strong>Reino Cósmico</strong> determinados a resolver todos los problemas menores que quedaban, aunque había uno de ellos que no quería continuar. <strong>Maci_Hq</strong>, cansado de la vida de aventuras constantes, muertes constantes y batallas, decidió volver a su hogar para retirarse de la vida de aventuras. Aunque para su desgracia, en un lugar lejano del multiverso —en un universo cercano al <strong>Reino Cósmico</strong> y al plano inmortal— había un ser el cual tenía planes macabros en contra de los Inmortales del universo de los inmortales. Alguien que contenía algo a lo que los inmortales nunca se habían enfrentado, algo que dejaba al <strong>Wither</strong> y a la <strong>Ender Dragon</strong> como simples hormigas. Los inmortales se enfrentarían a un ser que buscaba aniquilarlos con puro <strong class="palabra-odio-glitch">ODIO</strong>.</p>
+
+            <p>Para explicar este odio hay que explorar el <strong>Universo Efímero</strong>, en donde la vida sufre constantes desfases temporales debido al <strong>Universo Minecraft</strong>. Cada vez que un inmortal muere en el <strong>Universo Minecraft</strong> crea un cambio temporal a la hora de revivir que, aunque no lo notaran, afectaba el ritmo temporal en universos cercanos. Cabe destacar que el <strong>Universo Minecraft</strong> no sufre este desfase porque está adaptado para soportarlo, ya que los inmortales viven ahí; y el <strong>Universo del Reino Cósmico</strong> tampoco sufre consecuencias graves, ya que posee una resistencia a los cambios temporales sumamente grande. Sin embargo, en el <strong>Universo Efímero</strong> esto no pasaba desapercibido por su lejanía, y durante los eventos de <strong>Final Paradox</strong>, los inmortales que estuvieron en el <strong>Reino Cósmico</strong> murieron muchas veces en su batalla final, lo que al estar cerca del <strong>Universo Efímero</strong> causó una anomalía imprevista.</p>
+
+            <p>Un mortal de ese universo notó por primera vez los desfases temporales y el caos que su universo estaba sufriendo: un ciclo de repetición constante provocado por el retroceso repetitivo del tiempo. Este ser comenzó una investigación con un motivo claro: enfrentar a los inmortales de una vez por todas, pues para él ellos eran los culpables de todos sus males. Pasó mucho tiempo investigando a los héroes y buscando una forma de conectar ambos universos para poder acabar con el problema de raíz, hasta que por fin lo consiguió: un portal con el <strong>Universo Minecraft</strong>. No perdió el tiempo y comenzó a poner en práctica sus conocimientos a una velocidad peligrosa, enfrentando la complicación de los desfases que atrasaban sus movimientos. No obstante, él lo usaba como una herramienta útil contra fallos; si algo salía mal, esperaba al siguiente desfase para que el tiempo retrocediera y pudiera volver a intentar.</p>
+
+            <p>Creó un equipo y montó laboratorios en donde puso todo a prueba, fabricando el primer enlace y enviando a investigadores a pasar tiempo buscando algún núcleo o batería que pudieran aprovechar. Pocos días antes del regreso de <strong>Maci_Hq</strong> al plano inmortal, encontraron algo: <strong>El Núcleo del Universo</strong>. Lo llevaron a la <strong>Dimensión Efímera</strong> y lo probaron de diferentes formas, notando que no tenía ninguna función fuera de su universo. Así que planearon su último movimiento: crear una base en un punto medio entre ambos universos donde se guardaría el núcleo funcional, conectando el plano efímero para poder hacer pruebas y cambios que afectaran al <strong>Universo Minecraft</strong>. Al lograrlo, comenzó la cacería de inmortales; su plan era simple: llevar a soldados de su universo al <strong>plano inmortal</strong> y comenzar a batallar haciendo cambios que perjudicasen a los inmortales hasta neutralizarlos, quitándoles sus recursos y dejándolos al borde de la muerte para evitar que revivan con su vitalidad completa. Todo esto con un único plan en mente: <strong class="palabra-inmortalidad-roja">Quitarles la inmortalidad</strong>.</p>
+        </section>
+
+        <!-- Apartado 3: El Fin / Deathmatch -->
+        <img src="https://i.imgur.com/AdAoztL.png" alt="El Fin" class="img-titulo-final" id="anclaFinal">
+
+        <section class="bloque-texto texto-final" id="textoAnimado4">
+            <p>Tras su regreso, <strong>Maci_Hq</strong> dejó su vida atrás y se fue a un continente alejado de los inmortales con la intención de vivir una vida tranquila. Pasó tres meses viviendo pacíficamente, aunque más temprano que tarde la armada inmortal lo forzó al caos del campo de batalla. Los inmortales opusieron una gran resistencia ante el guerrero, pero lo que marcó la definitiva diferencia fue un arma diseñada especialmente para acabar con él. Tras la pérdida de todos sus recursos, tótems y equipamiento, el inmortal logró destruir el arma, pero cayó rendido al suelo por el agotamiento absoluto. Sin embargo, durante el combate consiguió enviar un mensaje de auxilio al <strong>Reino Cósmico</strong>, por lo que la llegada de los héroes era inevitable.</p>
+
+            <p>Previendo la inminente aparición de los refuerzos, los inmortales decidieron adelantar su siguiente fase. Intentaron por primera vez quitarle la inmortalidad a un combatiente herido, pero fracasaron rotunda y trágicamente. Los cálculos numéricos eran correctos, pero su hipótesis de que debilitar al portador favorecería el proceso fue errónea. El núcleo del inmortal, al encontrarse debilitado, era sumamente sensible y propenso a la sobrecarga, rompiendo la estabilidad interna de su propia esencia. Esto desató un efecto totalmente inesperado: si bien lograba arrebatarles la inmortalidad, también sumía al usuario en un estado de cansancio perpetuo, transmitiendo un sufrimiento similar al de una muerte lenta que jamás terminaba de consumarse. Ante este peligro, los mortales cambiaron su estrategia por completo: destinaron a casi todo su personal a mantener cautivos a los inmortales restantes en un estado saludable y estable, mientras un pequeño grupo de élite se encargaba de interrogar e investigar a <strong>Maci_Hq</strong> para forzarlo a detener el avance de los héroes.</p>
+
+            <p>Por su parte, los héroes ya habían encontrado solución a múltiples problemáticas en el <strong>Reino Cósmico</strong>, pero al ser notificados de la situación cambiaron drásticamente sus tácticas. Iniciaron una mejora apresurada en las defensas del <strong>Reino Cósmico</strong>, conscientes de que durante los eventos de <strong>Final Paradox</strong> sufrieron numerosas bajas y ahora ellos se erigían como los protectores principales. Aunque era poco probable que algún invasor lograra tomar el control, la certeza de que una amenaza había iniciado una caza sistemática en el <strong>Universo Minecraft</strong> los obligó a blindar el reino y sus artefactos más preciados. Dejaron sus armas especiales resguardadas allí, pues conocían el riesgo de perder la batalla y no podían permitir que semejante poder cayera en manos equivocadas. Emprendieron el viaje y, aunque el traslado entre universos tomó más tiempo del esperado, al llegar solo se toparon con un caos inminente. Se prepararon para librar una guerra total que al final nunca ocurrió: los soldados enemigos se retiraron de repente y el plan de los efímeros se puso en marcha. Juntaron a todos los mortales y lanzaron su ataque definitivo; el cielo entero se enrojeció y, en un fulminante haz de luz, los inmortales perdieron por fin su bien más preciado. El final había llegado: el líder de los efímeros dio inicio a su macabro juego, el <strong class="palabra-odio-glitch">DEATHMATCH</strong>.</p>
+        </section>
+
+        <!-- Sección posterior al fin: Especies e Inmortales -->
+        <img src="https://i.imgur.com/QPAkumE.png" alt="Especies" class="img-titulo-especies" id="anclaEspecies">
+        <img src="https://i.imgur.com/cG1slXx.png" alt="Inmortales" class="img-titulo-inmortales" id="anclaInmortales">
+
+        <div class="contenedor-inmortales">
+            <section class="panel-inmortales bloque-texto texto-final" id="textoAnimadoInmortales">
+                <p>Los inmortales son seres que conforman el <strong>Universo Minecraft</strong>, su principal característica es que al morir reviven en su punto de spawn retrocediendo el tiempo ligeramente. Aunque eso no lo notan porque su universo es resistente y no es afectado por ese retroceso. Un ejemplo de inmortales serian <strong>Maci_Hq</strong> o <strong>RamaWM29</strong>.</p>
+            </section>
+            <img src="https://i.imgur.com/NgYo8NB.png" alt="Ilustración Inmortales" class="img-lateral-inmortales">
+        </div>
+
+        <!-- Nueva Sección: Mortales -->
+        <img src="https://i.imgur.com/0KedJu2.png" alt="Mortales" class="img-titulo-mortales" id="anclaMortales">
+
+        <div class="contenedor-mortales">
+            <section class="panel-mortales bloque-texto texto-final" id="textoAnimadoMortales">
+                <p>Los mortales son los habitantes del <strong>Universo Efímero</strong>, tienen una vida limitada y no pueden volver de la muerte. Además de eso, su universo no tiene protección contra los cambios temporales, así que se ven afectados ante esta problemática. Todavía no conocen ningún habitante de este universo.</p>
+            </section>
+            <img src="https://i.imgur.com/MEu1y81.png" alt="Ilustración Mortales" class="img-lateral-mortales">
+        </div>
+
+        <!-- Nueva Sección: Universos -->
+        <img src="https://i.imgur.com/s8xRQMA.png" alt="Universos" class="img-titulo-universos" id="anclaUniversos">
+        
+        <div class="panel-universos-grande" id="panelUniversos">
+            <!-- Vista de Mapa Estelar con las 4 esferas como imágenes (Distribución Ref 1) -->
+            <div class="universo-mapa" id="universoMapa">
+                <div class="objeto-universo rojo" style="top: 60%; left: 18%;" data-tooltip="Test: Universo Rojo" data-target="detalleRojo">
+                    <img src="https://i.imgur.com/tITAdCk.png" alt="Universo Rojo" class="img-objeto-universo">
+                    <div class="tooltip-box">Test: Universo Efimero</div>
+                </div>
+                <div class="objeto-universo morado" style="top: 25%; left: 50%;" data-tooltip="Test: Universo Morado" data-target="detalleMorado">
+                    <img src="https://i.imgur.com/jqzlSnu.png" alt="Universo Morado" class="img-objeto-universo">
+                    <div class="tooltip-box">Test: Universo del Reino Cosmico</div>
+                </div>
+                <div class="objeto-universo celeste" style="top: 60%; left: 75%;" data-tooltip="Test: Universo Celeste" data-target="detalleCeleste">
+                    <img src="https://i.imgur.com/WPUZO2K.png" alt="Universo Celeste" class="img-objeto-universo">
+                    <div class="tooltip-box">Test: Universo Minecraft</div>
+                </div>
+                <div class="objeto-universo blanco" style="top: 78%; left: 49%;" data-tooltip="Test: Universo Blanco" data-target="detalleBlanco">
+                    <img src="https://i.imgur.com/I6vVapa.png" alt="Universo Blanco" class="img-objeto-universo">
+                    <div class="tooltip-box">Test: Universo Matrix </div>
+                </div>
+            </div>
+
+            <!-- Vista de Detalle / Interfaz con imagen grande distinta (Referencia 2) -->
+            <div class="universo-detalle" id="universoDetalle">
+                <button class="btn-volver-mapa" id="btnVolverMapa">← Volver</button>
+                <div class="detalle-contenido">
+                    <img class="detalle-imagen-grande" id="detalleImagenGrande" src="" alt="Detalle Universo">
+                    <div class="detalle-texto-contenedor">
+                        <div class="detalle-texto-titulo" id="detalleTitulo">Texto</div>
+                        <p class="detalle-texto-desc" id="detalleDesc">Placeholder description for this universe object. Interactive detail interface view.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Logo Maci Hq Studios -->
+    <img src="https://i.imgur.com/tPcG0ge.png" alt="Maci HQ Studios Logo" class="logo-2">
+
+    <!-- Script de animación, generación de estrellas y fundido gradual del fondo -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Generar estrellas celestes en Especies
+            const containerEstrellas = document.getElementById('estrellasContainer');
+            if (containerEstrellas) {
+                const cantidadEstrellas = 75;
+                for (let i = 0; i < cantidadEstrellas; i++) {
+                    const estrella = document.createElement('div');
+                    estrella.className = 'estrella';
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const tamano = Math.random() * 2 + 1; 
+                    const duracion = (Math.random() * 3 + 2).toFixed(2); 
+
+                    estrella.style.left = `${posX}%`;
+                    estrella.style.top = `${posY}%`;
+                    estrella.style.width = `${tamano}px`;
+                    estrella.style.height = `${tamano}px`;
+                    estrella.style.setProperty('--duracion', `${duracion}s`);
+                    estrella.style.animationDelay = `${(Math.random() * 3).toFixed(2)}s`;
+
+                    containerEstrellas.appendChild(estrella);
+                }
+            }
+
+            // Generar estrellas rojas en Mortales
+            const containerEstrellasRojas = document.getElementById('estrellasRojasContainer');
+            if (containerEstrellasRojas) {
+                const cantidadEstrellasRojas = 75;
+                for (let i = 0; i < cantidadEstrellasRojas; i++) {
+                    const estrellaRoja = document.createElement('div');
+                    estrellaRoja.className = 'estrella-roja';
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const tamano = Math.random() * 2 + 1; 
+                    const duracion = (Math.random() * 3 + 2).toFixed(2); 
+
+                    estrellaRoja.style.left = `${posX}%`;
+                    estrellaRoja.style.top = `${posY}%`;
+                    estrellaRoja.style.width = `${tamano}px`;
+                    estrellaRoja.style.height = `${tamano}px`;
+                    estrellaRoja.style.setProperty('--duracion', `${duracion}s`);
+                    estrellaRoja.style.animationDelay = `${(Math.random() * 3).toFixed(2)}s`;
+
+                    containerEstrellasRojas.appendChild(estrellaRoja);
+                }
+            }
+
+            // Generar estrellas en Universos
+            const containerEstrellasUniversos = document.getElementById('estrellasUniversosContainer');
+            if (containerEstrellasUniversos) {
+                const cantidadEstrellasUni = 75;
+                for (let i = 0; i < cantidadEstrellasUni; i++) {
+                    const estrellaUni = document.createElement('div');
+                    estrellaUni.className = 'estrella-universos';
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const tamano = Math.random() * 2 + 1; 
+                    const duracion = (Math.random() * 3 + 2).toFixed(2); 
+
+                    estrellaUni.style.left = `${posX}%`;
+                    estrellaUni.style.top = `${posY}%`;
+                    estrellaUni.style.width = `${tamano}px`;
+                    estrellaUni.style.height = `${tamano}px`;
+                    estrellaUni.style.setProperty('--duracion', `${duracion}s`);
+                    estrellaUni.style.animationDelay = `${(Math.random() * 3).toFixed(2)}s`;
+
+                    containerEstrellasUniversos.appendChild(estrellaUni);
+                }
+            }
+
+            function animarTexto(idContenedor, claseChispaNormal) {
+                const contenedor = document.getElementById(idContenedor);
+                if (!contenedor) return;
+
+                let contadorPalabras = 0;
+
+                function procesarNodo(nodo) {
+                    if (nodo.nodeType === Node.TEXT_NODE) {
+                        const texto = nodo.textContent;
+                        if (!texto.trim()) return;
+
+                        const palabras = texto.split(/(\s+)/);
+                        const fragmento = document.createDocumentFragment();
+
+                        palabras.forEach(palabra => {
+                            if (palabra.trim() === '') {
+                                fragmento.appendChild(document.createTextNode(palabra));
+                            } else {
+                                const span = document.createElement('span');
+                                
+                                const padreStrong = nodo.parentNode.closest('strong');
+                                if (padreStrong) {
+                                    if (padreStrong.classList.contains('palabra-odio-glitch')) {
+                                        span.className = 'palabra-odio-glitch';
+                                    } else if (padreStrong.classList.contains('palabra-inmortalidad-roja')) {
+                                        span.className = 'palabra-inmortalidad-roja';
+                                    } else {
+                                        span.className = 'palabra-animada ' + claseChispaNormal;
+                                    }
+                                } else {
+                                    span.className = 'palabra-animada';
+                                }
+
+                                span.textContent = palabra;
+                                span.style.animationDelay = `${contadorPalabras * 0.045}s`;
+                                contadorPalabras++;
+                                fragmento.appendChild(span);
+                            }
+                        });
+
+                        nodo.parentNode.replaceChild(fragmento, nodo);
+                    } else if (nodo.nodeType === Node.ELEMENT_NODE) {
+                        if (nodo.classList && (nodo.classList.contains('palabra-odio-glitch') || nodo.classList.contains('palabra-inmortalidad-roja'))) {
+                            const textoInterno = nodo.textContent;
+                            nodo.innerHTML = '';
+                            const spanUnico = document.createElement('span');
+                            spanUnico.className = nodo.className;
+                            spanUnico.textContent = textoInterno;
+                            spanUnico.style.animationDelay = `${contadorPalabras * 0.045}s`;
+                            contadorPalabras++;
+                            nodo.appendChild(spanUnico);
+                        } else {
+                            Array.from(nodo.childNodes).forEach(procesarNodo);
+                        }
+                    }
+                }
+
+                Array.from(contenedor.childNodes).forEach(procesarNodo);
+            }
+
+            animarTexto('textoAnimado1', 'palabra-chispa-roja');
+            animarTexto('textoAnimado2', 'palabra-chispa-morada');
+            animarTexto('textoAnimado3', 'palabra-chispa-celeste');
+            animarTexto('textoAnimado4', 'palabra-chispa-blanca');
+            animarTexto('textoAnimadoInmortales', 'palabra-chispa-celeste');
+            animarTexto('textoAnimadoMortales', 'palabra-chispa-roja');
+
+            // Transición gradual de fondo basada en el desplazamiento (Scroll)
+            const capaMorada = document.getElementById('capaMorada');
+            const capaCeleste = document.getElementById('capaCeleste');
+            const capaBlanca = document.getElementById('capaBlanca');
+            const capaEspecies = document.getElementById('capaEspecies');
+            const capaMortales = document.getElementById('capaMortales');
+            const capaUniversos = document.getElementById('capaUniversos');
+
+            const imgHistoria = document.getElementById('anclaHistoria');
+            const imgAmenaza = document.getElementById('anclaAmenaza');
+            const imgFinal = document.getElementById('anclaFinal');
+            const imgEspecies = document.getElementById('anclaEspecies');
+            const imgMortales = document.getElementById('anclaMortales');
+            const imgUniversos = document.getElementById('anclaUniversos');
+
+            window.addEventListener('scroll', () => {
+                const windowHeight = window.innerHeight;
+                const start = windowHeight * 0.85;
+                const end = windowHeight * 0.15;
+
+                function calcularProgreso(elementoInicio, elementoSiguiente) {
+                    if (!elementoInicio) return 0;
+                    const rect = elementoInicio.getBoundingClientRect();
+                    let prog = (start - rect.top) / (start - end);
+                    prog = Math.max(0, Math.min(1, prog));
+
+                    if (elementoSiguiente) {
+                        const rectSig = elementoSiguiente.getBoundingClientRect();
+                        if (rectSig.top < windowHeight) {
+                            let progSalida = (windowHeight - rectSig.top) / (windowHeight * 0.7);
+                            prog = Math.max(0, prog - progSalida);
+                        }
+                    }
+                    return prog;
+                }
+
+                if (capaMorada) capaMorada.style.opacity = calcularProgreso(imgHistoria, imgAmenaza);
+                if (capaCeleste) capaCeleste.style.opacity = calcularProgreso(imgAmenaza, imgFinal);
+                if (capaBlanca) capaBlanca.style.opacity = calcularProgreso(imgFinal, imgEspecies);
+                if (capaEspecies) capaEspecies.style.opacity = calcularProgreso(imgEspecies, imgMortales);
+                if (capaMortales) capaMortales.style.opacity = calcularProgreso(imgMortales, imgUniversos);
+                
+                if (capaUniversos && imgUniversos) {
+                    const rect = imgUniversos.getBoundingClientRect();
+                    let progUni = (start - rect.top) / (start - end);
+                    capaUniversos.style.opacity = Math.max(0, Math.min(1, progUni));
+                }
+            });
+
+            // Lógica interactiva para el mapa de Universos y la transición a la vista de detalle
+            const objetosUniverso = document.querySelectorAll('.objeto-universo');
+            const universoMapa = document.getElementById('universoMapa');
+            const universoDetalle = document.getElementById('universoDetalle');
+            const btnVolverMapa = document.getElementById('btnVolverMapa');
+            
+            const detalleTitulo = document.getElementById('detalleTitulo');
+            const detalleDesc = document.getElementById('detalleDesc');
+            const detalleImagenGrande = document.getElementById('detalleImagenGrande');
+
+            // Imágenes y descripciones distintas asignadas al hacer click en cada objeto
+            const datosUniversos = {
+                detalleRojo: {
+                    titulo: "Universo Efímero",
+                    desc: "El Universo Efímero es un paralelo al universo de Minecraft, pero aquí sus habitantes no pueden volver de la muerte. Es mucho más moderno por los avances que sus habitantes hicieron, pero tiene una nula resistencia ante efectos temporales, así que es muy vulnerable.",
+                    imagenDetalle: "https://i.imgur.com/tITAdCk.png"
+                },
+                detalleMorado: {
+                    titulo: "Universo del Reino Cósmico",
+                    desc: "El Universo del Reino Cósmico es el lugar donde ocurrieron los hechos de Final Paradox y el universo más cercano al Universo de Minecraft. Este universo está dividido en varios mundos; entre ellos, los 15 mundos en donde están los núcleos cósmicos. Este universo tiene una resistencia temporal alta por todos los conflictos temporales que ocurrieron en este lugar. Es el universo con más energía en su interior y tiene un tamaño muy grande.",
+                    imagenDetalle: "https://i.imgur.com/jqzlSnu.png"
+                },
+                detalleCeleste: {
+                    titulo: "Universo Minecraft",
+                    desc: "El Universo Minecraft es el lugar en donde viven entidades como inmortales, monstruos, animales y comerciantes como los villagers o piglins. Se divide en tres dimensiones: Overworld, Nether y End. Tiene una resistencia absoluta al retroceso temporal que genera cada muerte de un inmortal.",
+                    imagenDetalle: "https://i.imgur.com/WPUZO2K.png"
+                },
+                detalleBlanco: {
+                    titulo: "Universo Matrix",
+                    desc: "El Universo Matrix es un universo artificial hecho por los mortales con el Núcleo del Universo de Minecraft para hacer su base de operaciones y esconder dicho núcleo.",
+                    imagenDetalle: "https://i.imgur.com/I6vVapa.png"
+                }
+            };
+
+            objetosUniverso.forEach(obj => {
+                obj.addEventListener('click', () => {
+                    const targetKey = obj.getAttribute('data-target');
+                    const info = datosUniversos[targetKey];
+                    if (info) {
+                        detalleTitulo.textContent = info.titulo;
+                        detalleDesc.textContent = info.desc;
+                        detalleImagenGrande.src = info.imagenDetalle;
+                    }
+
+                    universoMapa.classList.add('oculto');
+                    universoDetalle.classList.add('activo');
+                });
+            });
+
+            if (btnVolverMapa) {
+                btnVolverMapa.addEventListener('click', () => {
+                    universoDetalle.classList.remove('activo');
+                    universoMapa.classList.remove('oculto');
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
