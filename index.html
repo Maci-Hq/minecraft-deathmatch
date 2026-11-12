@@ -1,10 +1,8 @@
-<!DOCTYPE html>  
-<html lang="es">  
+<!DOCTYPE html>  <html lang="es">  
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Minecraft Deathmatch</title>  
-    <style>  
+    <title>Minecraft Deathmatch</title>  <style>  
     /* Carga de la fuente personalizada local */  
     @font-face {  
         font-family: 'MinecraftCustom';  
@@ -347,6 +345,263 @@
         100% {  
             transform: scale(1.05);  
             filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.9));  
+        }  
+    }  
+
+    /* Bloque de texto principal y de historia */  
+    .bloque-texto {  
+        width: 100%;  
+        text-align: left;  
+        line-height: 1.9;  
+        font-size: 1.25rem;  
+        color: #e0e0e0;  
+    }  
+
+    /* Estilo base para cada palabra animada normal */  
+    .palabra-animada {  
+        opacity: 0;  
+        display: inline-block;  
+        transform: translateY(12px);  
+        animation: palabraAparece 0.35s ease-out forwards;  
+    }  
+
+    @keyframes palabraAparece {  
+        to {  
+            opacity: 1;  
+            transform: translateY(0);  
+        }  
+    }  
+
+    /* Brillo rojo para la bienvenida */  
+    .palabra-chispa-roja {  
+        animation: palabraAparece 0.35s ease-out forwards, brilloRojoEfecto 1.5s ease-out forwards;  
+    }  
+
+    @keyframes brilloRojoEfecto {  
+        0% {  
+            filter: drop-shadow(0 0 18px #ff0000) drop-shadow(0 0 8px #ff3333) brightness(1.8);  
+            color: #ffffff;  
+        }  
+        30% {  
+            filter: drop-shadow(0 0 14px #ff0000) brightness(1.5);  
+            color: #ff8888;  
+        }  
+        70% {  
+            filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.7)) brightness(1.2);  
+            color: #ff4d4d;  
+        }  
+        100% {  
+            filter: drop-shadow(0 0 0px transparent) brightness(1);  
+            color: #ff4d4d;  
+        }  
+    }  
+
+    /* Brillo morado para la primera historia */  
+    .palabra-chispa-morada {  
+        animation: palabraAparece 0.35s ease-out forwards, brilloMoradoEfecto 1.5s ease-out forwards;  
+    }  
+
+    @keyframes brilloMoradoEfecto {  
+        0% {  
+            filter: drop-shadow(0 0 18px #b000ff) drop-shadow(0 0 8px #cc44ff) brightness(1.8);  
+            color: #ffffff;  
+        }  
+        30% {  
+            filter: drop-shadow(0 0 14px #b000ff) brightness(1.5);  
+            color: #e088ff;  
+        }  
+        70% {  
+            filter: drop-shadow(0 0 8px rgba(176, 0, 255, 0.7)) brightness(1.2);  
+            color: #d14dff;  
+        }  
+        100% {  
+            filter: drop-shadow(0 0 0px transparent) brightness(1);  
+            color: #d14dff;  
+        }  
+    }  
+
+    /* Brillo celeste para la nueva historia */  
+    .palabra-chispa-celeste {  
+        animation: palabraAparece 0.35s ease-out forwards, brilloCelesteEfecto 1.5s ease-out forwards;  
+    }  
+
+    @keyframes brilloCelesteEfecto {  
+        0% {  
+            filter: drop-shadow(0 0 18px #00ffff) drop-shadow(0 0 8px #33ccff) brightness(1.8);  
+            color: #ffffff;  
+        }  
+        30% {  
+            filter: drop-shadow(0 0 14px #00ffff) brightness(1.5);  
+            color: #88ffff;  
+        }  
+        70% {  
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.7)) brightness(1.2);  
+            color: #4dd2ff;  
+        }  
+        100% {  
+            filter: drop-shadow(0 0 0px transparent) brightness(1);  
+            color: #4dd2ff;  
+        }  
+    }  
+
+    /* Brillo blanco REFORZADO */  
+    .palabra-chispa-blanca {  
+        animation: palabraAparece 0.35s ease-out forwards, brilloBlancoIntenso 1.5s ease-out forwards;  
+    }  
+
+    @keyframes brilloBlancoIntenso {  
+        0% {  
+            filter: drop-shadow(0 0 22px #ffffff) drop-shadow(0 0 10px #ffffff) brightness(2.2);  
+            color: #ffffff;  
+        }  
+        40% {  
+            filter: drop-shadow(0 0 16px #ffffff) brightness(1.8);  
+            color: #ffffff;  
+        }  
+        80% {  
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9)) brightness(1.4);  
+            color: #f2f2f2;  
+        }  
+        100% {  
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5)) brightness(1.2);  
+            color: #ffffff;  
+        }  
+    }  
+
+    /* Efecto especial "ODIO" y "DEATHMATCH" (Glitch en rojo) */  
+    .palabra-odio-glitch {  
+        display: inline-block;  
+        opacity: 0;  
+        transform: translateY(12px);  
+        animation: palabraAparece 0.35s ease-out forwards, efectoOdioGlitch 2s ease-in-out infinite alternate;  
+    }  
+
+    @keyframes efectoOdioGlitch {  
+        0% {  
+            color: #ff0000;  
+            filter: drop-shadow(0 0 4px #ff0000) brightness(0.6);  
+            transform: translateY(0) translate(0, 0);  
+        }  
+        20% {  
+            color: #ff4d4d;  
+            filter: drop-shadow(0 0 15px #ff0000) brightness(1.8);  
+            transform: translateY(0) translate(-1px, 1px);  
+        }  
+        22% {  
+            color: #990000;  
+            filter: drop-shadow(0 0 2px #550000) brightness(0.4);  
+            transform: translateY(0) translate(2px, -1px);  
+        }  
+        40% {  
+            color: #ff1a1a;  
+            filter: drop-shadow(0 0 10px #ff0000) brightness(1.2);  
+            transform: translateY(0) translate(0, 0);  
+        }  
+        60% {  
+            color: #ff6666;  
+            filter: drop-shadow(0 0 20px #ff0000) brightness(2.0);  
+            transform: translateY(0) translate(-1px, -1px);  
+        }  
+        80% {  
+            color: #b30000;  
+            filter: drop-shadow(0 0 5px #ff0000) brightness(0.8);  
+            transform: translateY(0) translate(1px, 1px);  
+        }  
+        100% {  
+            color: #ff3333;  
+            filter: drop-shadow(0 0 12px #ff0000) brightness(1.5);  
+            transform: translateY(0) translate(0, 0);  
+        }  
+    }  
+
+    /* Efecto rojo para "Quitarles la inmortalidad" */  
+    .palabra-inmortalidad-roja {  
+        display: inline-block;  
+        opacity: 0;  
+        transform: translateY(12px);  
+        animation: palabraAparece 0.35s ease-out forwards, brilloRojoEfecto 1.5s ease-out forwards;  
+    }  
+
+    .bloque-texto p {  
+        margin-bottom: 25px;  
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);  
+    }  
+
+    .bloque-texto p:last-child {  
+        margin-bottom: 0;  
+    }  
+
+    .texto-bienvenido strong { color: #ff4d4d; }  
+    .texto-historia strong { color: #d14dff; }  
+    .texto-amenaza strong { color: #4dd2ff; }  
+    .texto-final strong { color: #ffffff; }  
+
+    /* Estilo para los contenedores de paneles con imagen lateral */  
+    .contenedor-inmortales, .contenedor-mortales {  
+        width: 100%;  
+        display: flex;  
+        align-items: center;  
+        gap: 40px;  
+        margin-top: 10px;  
+    }  
+
+    .panel-inmortales {  
+        flex: 1;  
+        background-color: rgba(0, 0, 0, 0.6);  
+        border: 2px solid #00c3ff;  
+        border-radius: 6px;  
+        padding: 35px 40px;  
+        box-shadow: 0 0 15px rgba(0, 195, 255, 0.3);  
+    }  
+
+    .img-lateral-inmortales {  
+        max-width: 320px;  
+        width: 100%;  
+        height: auto;  
+        object-fit: contain;  
+        border-radius: 6px;  
+        filter: drop-shadow(0 0 12px rgba(0, 204, 255, 0.5));  
+    }  
+
+    .panel-mortales {  
+        flex: 1;  
+        background-color: rgba(0, 0, 0, 0.6);  
+        border: 2px solid #ff3333;  
+        border-radius: 6px;  
+        padding: 35px 40px;  
+        box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);  
+    }  
+
+    .img-lateral-mortales {  
+        max-width: 320px;  
+        width: 100%;  
+        height: auto;  
+        object-fit: contain;  
+        border-radius: 6px;  
+        filter: drop-shadow(0 0 12px rgba(255, 51, 51, 0.5));  
+    }  
+
+    /* Panel negro grande con fondo de espacio (Sección Universos) */  
+    .panel-universos-grande {  
+        width: 100%;  
+        height: 450px;  
+        background-color: #000000;  
+        background-image:   
+            radial-gradient(1.5px 1.5px at 10% 20%, #ffffff 100%, transparent),  
+            radial-gradient(2px 2px at 25% 70%, #ffffff 100%, transparent),  
+            radial-gradient(1px 1px at 50% 30%, #ffffff 100%, transparent),  
+            radial-gradient(2px 2px at 75% 80%, #ffffff 100%, transparent),  
+            radial-gradient(1.5px 1.5px at 90% 15%, #ffffff 100%, transparent),  
+            radial-gradient(1px 1px at 40% 90%, #ffffff 100%, transparent);  
+        background-size: 100% 100%;  
+        border: 2px solid #ffffff;  
+        border-radius: 8px;  
+        margin-top: 20px;  
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);  
+        position: relative;  
+        overflow: hidden;
+
+Mejora el soporte móvil en el último panel de universos. Quitaré el texto "test" a los nombres 
         }  
     }  
 
