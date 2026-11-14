@@ -914,6 +914,19 @@
                 height: 28px;
             }
         }
+
+        /* Zoom global equivalente al 75% del navegador */
+        html {
+            zoom: 0.75;
+        }
+
+        /* En móviles se conserva el diseño responsive a tamaño normal */
+        @media (max-width: 768px) {
+            html {
+                zoom: 1;
+            }
+        }
+
     </style>
 </head>
 <body>
