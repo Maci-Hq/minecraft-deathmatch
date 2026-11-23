@@ -209,9 +209,10 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.85);
         }
 
-        /* Contenedor responsive para el video de YouTube */
+        /* Contenedor responsive para la imagen clickeable del video */
         .video-container {
             position: relative;
+            display: block;
             width: 100%;
             padding-bottom: 56.25%;
             height: 0;
@@ -219,15 +220,22 @@
             border-radius: 4px;
             border: 1px solid rgba(255, 255, 255, 0.25);
             background-color: #000000;
+            cursor: pointer;
         }
 
-        .video-container iframe {
+        .video-container img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: 0;
+            object-fit: cover;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .video-container:hover img {
+            transform: scale(1.03);
+            filter: brightness(1.08);
         }
 
         /* Descripción de la noticia */
@@ -362,10 +370,11 @@
             <span class="fecha-noticia">14/11/2026</span>
 
             <div class="panel-noticia">
-                <!-- Panel de video de YouTube (Reemplaza TU_ID_DE_YOUTUBE con el identificador real de tu video) -->
-                <div class="video-container">
-                    <iframe src="https://youtu.be/PDS-Lj1gU_Y" title="Video trailer 1" loading="lazy" allowfullscreen></iframe>
-                </div>
+                <!-- Imagen clickeable que lleva al video en YouTube -->
+                <!-- Reemplaza "PON_AQUI_LA_URL_DE_TU_IMAGEN" con la URL de tu imagen -->
+                <a href="https://youtu.be/PDS-Lj1gU_Y" target="_blank" rel="noopener noreferrer" class="video-container" aria-label="Ver Video trailer 1 en YouTube">
+                    <img src="PON_AQUI_LA_URL_DE_TU_IMAGEN" alt="Video trailer 1" loading="lazy">
+                </a>
                 <!-- Descripción -->
                 <p class="desc-noticia">Video trailer 1 lanzado</p>
             </div>
