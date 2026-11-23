@@ -214,6 +214,29 @@
             animation: pulsoSeccion 3s ease-in-out infinite alternate;
         }
 
+        /* Enlace y logo grande clickeable de la sección 2 */
+        .link-logo-seccion2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 45px;
+            cursor: pointer;
+        }
+
+        .img-seccion-grande {
+            max-width: 520px;
+            width: 92%;
+            height: auto;
+            object-fit: contain;
+            animation: pulsoSeccionGrande 3s ease-in-out infinite alternate;
+            transition: transform 0.25s ease;
+        }
+
+        .link-logo-seccion2:hover .img-seccion-grande {
+            transform: scale(1.06);
+        }
+
         @keyframes pulsoSeccion {
             0% {
                 transform: scale(1);
@@ -222,6 +245,17 @@
             100% {
                 transform: scale(1.04);
                 filter: drop-shadow(0 0 22px rgba(255, 215, 0, 0.8));
+            }
+        }
+
+        @keyframes pulsoSeccionGrande {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
+            }
+            100% {
+                transform: scale(1.03);
+                filter: drop-shadow(0 0 24px rgba(255, 215, 0, 0.85));
             }
         }
 
@@ -308,7 +342,7 @@
             }
         }
 
-        /* Nombres de la sección 2 con mismo efecto pero en rojo */
+        /* Brillo rojo (ElRichMC) */
         .nombre-rojo {
             font-size: 1.5rem;
             color: #ff3333;
@@ -323,6 +357,44 @@
             }
             100% {
                 filter: drop-shadow(0 0 12px rgba(255, 50, 50, 0.95));
+                transform: scale(1.02);
+            }
+        }
+
+        /* Brillo amarillo (DarthVid) */
+        .nombre-amarillo {
+            font-size: 1.5rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            animation: pulsoAmarillo 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulsoAmarillo {
+            0% {
+                filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.45));
+                transform: scale(1);
+            }
+            100% {
+                filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.95));
+                transform: scale(1.02);
+            }
+        }
+
+        /* Brillo celeste (Luisb1202) */
+        .nombre-celeste {
+            font-size: 1.5rem;
+            color: #33ddff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            animation: pulsoCeleste 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulsoCeleste {
+            0% {
+                filter: drop-shadow(0 0 2px rgba(51, 221, 255, 0.45));
+                transform: scale(1);
+            }
+            100% {
+                filter: drop-shadow(0 0 12px rgba(51, 221, 255, 0.95));
                 transform: scale(1.02);
             }
         }
@@ -437,8 +509,9 @@
                 margin-bottom: 20px;
             }
 
-            .img-seccion {
-                max-width: 220px;
+            .img-seccion,
+            .img-seccion-grande {
+                max-width: 260px;
                 margin-bottom: 25px;
             }
 
@@ -455,7 +528,11 @@
                 height: 90px;
             }
 
-            .nombre-maci, .nombre-rama, .nombre-rojo {
+            .nombre-maci,
+            .nombre-rama,
+            .nombre-rojo,
+            .nombre-amarillo,
+            .nombre-celeste {
                 font-size: 1.25rem;
             }
 
@@ -578,8 +655,10 @@
                 <!-- Texto introductorio antes del título de la sección 2 -->
                 <p class="texto-intro-seccion2">Esta historia es una continuacion alternativa de Final Paradox hecha para agregar los aconteciminetos al Maxi Lore en donde se usaron de referencia para el armado del prologo que va antes de la historia original del Deathmatch. Aqui los creadores de ese mapa:</p>
 
-                <!-- Reemplaza "PON_AQUI_URL_TITULO_SECCION_2" con la imagen de título de esta sección -->
-                <img src="https://i.imgur.com/Siqlf5S.png" alt="Fundación del proyecto" class="img-seccion">
+                <!-- Reemplaza "PON_AQUI_TU_LINK" con el enlace al que llevará el logo y "PON_AQUI_URL_TITULO_SECCION_2" con la imagen -->
+                <a href="PON_AQUI_TU_LINK" target="_blank" rel="noopener noreferrer" class="link-logo-seccion2" aria-label="Ir al enlace de Fundación del proyecto">
+                    <img src="PON_AQUI_URL_TITULO_SECCION_2" alt="Fundación del proyecto" class="img-seccion-grande">
+                </a>
 
                 <!-- Tres paneles de la sección 2 -->
                 <div class="contenedor-tarjetas">
@@ -588,7 +667,7 @@
                     <div class="tarjeta-contribuidor">
                         <div class="avatar-box">
                             <!-- Reemplaza "PON_AQUI_URL_ICONO_ELRICHMC" con el icono de ElRichMC -->
-                            <img src="https://i.imgur.com/jAmPO01.png" alt="Icono ElRichMC" class="avatar-img">
+                            <img src="PON_AQUI_URL_ICONO_ELRICHMC" alt="Icono ElRichMC" class="avatar-img">
                         </div>
                         <div class="info-contribuidor">
                             <h2 class="nombre-rojo">ElRichMC</h2>
@@ -600,10 +679,10 @@
                     <div class="tarjeta-contribuidor">
                         <div class="avatar-box">
                             <!-- Reemplaza "PON_AQUI_URL_ICONO_DARTHVID" con el icono de DarthVid -->
-                            <img src="https://i.imgur.com/fFEDLtl.png" alt="Icono DarthVid" class="avatar-img">
+                            <img src="PON_AQUI_URL_ICONO_DARTHVID" alt="Icono DarthVid" class="avatar-img">
                         </div>
                         <div class="info-contribuidor">
-                            <h2 class="nombre-rojo">DarthVid</h2>
+                            <h2 class="nombre-amarillo">DarthVid</h2>
                             <p class="descripcion-contribuidor">Construcción del mapa Diseño de nivel, entornos e historia principal. Spawners, loot y sprites del resource pack</p>
                         </div>
                     </div>
@@ -612,10 +691,10 @@
                     <div class="tarjeta-contribuidor">
                         <div class="avatar-box">
                             <!-- Reemplaza "PON_AQUI_URL_ICONO_LUISB1202" con el icono de Luisb1202 -->
-                            <img src="https://i.imgur.com/9YrSSsI.png" alt="Icono Luisb1202" class="avatar-img">
+                            <img src="PON_AQUI_URL_ICONO_LUISB1202" alt="Icono Luisb1202" class="avatar-img">
                         </div>
                         <div class="info-contribuidor">
-                            <h2 class="nombre-rojo">Luisb1202</h2>
+                            <h2 class="nombre-celeste">Luisb1202</h2>
                             <p class="descripcion-contribuidor">Comandos y programación, Efectos visuales, animaciones, diálogos y testing. Diseño de nivel, jefes, mecánicas y objetos especiales.</p>
                         </div>
                     </div>
@@ -693,4 +772,3 @@
 
 </body>
 </html>
-
