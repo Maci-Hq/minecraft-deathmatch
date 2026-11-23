@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Deathmatch - Formulario</title>
+    <!-- Fuente de respaldo estilo pixel art por si Minecraft.ttf no se encuentra en la ruta -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        /* Carga de la fuente personalizada local */
+        @font-face {
+            font-family: 'MinecraftCustom';
+            src: url('Minecraft.ttf') format('truetype'),
+                 url('./Minecraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'MinecraftCustom', 'Press Start 2P', monospace, sans-serif;
+        }
+
+        body {
+            font-family: 'MinecraftCustom', 'Press Start 2P', monospace, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a0000;
+            position: relative;
+        }
+
+        /* Capa de degradado estática optimizada para evitar lag al hacer scroll */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #660000 0%, #1a0000 40%, #000000 80%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Barra superior / Encabezado */
+        header {
+            width: 100%;
+            padding: 4px 30px;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* Logo 1 (Arriba a la izquierda) */
+        .logo-1 {
+            height: 100px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            margin-top: 30px;
+            margin-bottom: 4px;
+        }
+
+        /* Contenedor con flechas para navegación superior */
+        .nav-container-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 30px;
+            position: relative;
+            max-width: calc(100vw - 200px);
+        }
+
+        .nav-botones {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 4px 2px;
+        }
+
+        .nav-botones::-webkit-scrollbar {
+            display: none;
+        }
+
+        .btn-nav {
+            display: block;
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            cursor: pointer;
+            transform: translateZ(0);
+            transition: transform 0.2s ease, filter 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .btn-nav:hover {
+            transform: scale(1.06) translateZ(0);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+        }
+
+        /* Flechas de navegación con imágenes */
+        .btn-nav-arrow {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .btn-arrow-img {
+            display: block;
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            transform: scaleX(-1);
+        }
+
+        #scrollRightBtn .btn-arrow-img {
+            transform: scaleX(1);
+        }
+
+        .btn-nav-arrow:hover {
+            transform: scale(1.06);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+        }
+
+        /* Contenedor principal */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 40px 180px 140px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Imagen de cabecera de la sección con brillo dorado */
+        .img-seccion {
+            max-width: 320px;
+            width: 80%;
+            height: auto;
+            margin-bottom: 35px;
+            object-fit: contain;
+            transform: translateZ(0);
+            animation: pulsoSeccion 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulsoSeccion {
+            0% {
+                transform: scale(1) translateZ(0);
+                filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.35));
+            }
+            100% {
+                transform: scale(1.04) translateZ(0);
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.85));
+            }
+        }
+
+        /* Contenedor del formulario con efecto sutil de profundidad y brillo */
+        .contenedor-formulario {
+            width: 100%;
+            max-width: 950px;
+            background: linear-gradient(180deg, rgba(60, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.78) 28%, rgba(0, 0, 0, 0.85) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.85),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                0 0 14px rgba(153, 0, 0, 0.28);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .contenedor-formulario:hover {
+            border-color: #ffffff;
+            box-shadow:
+                0 10px 28px rgba(0, 0, 0, 0.9),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                0 0 22px rgba(255, 215, 0, 0.18);
+        }
+
+        .campo-grupo {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .campo-label {
+            font-size: 0.95rem;
+            color: #ffffff;
+            line-height: 1.5;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        .campo-ayuda {
+            font-size: 0.75rem;
+            color: #cccccc;
+            line-height: 1.5;
+        }
+
+        .campo-input,
+        .campo-textarea {
+            width: 100%;
+            background-color: rgba(15, 15, 15, 0.9);
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            padding: 14px;
+            color: #ffffff;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .campo-input:focus,
+        .campo-textarea:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.35);
+        }
+
+        .campo-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Selector de archivo estilizado */
+        .file-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .input-file-oculto {
+            display: none;
+        }
+
+        .btn-archivo {
+            display: inline-block;
+            background-color: #3a0000;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            padding: 12px 18px;
+            color: #ffffff;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-archivo:hover {
+            transform: scale(1.03);
+            background-color: #5c0000;
+            border-color: #ffd700;
+        }
+
+        .nombre-archivo {
+            font-size: 0.75rem;
+            color: #cccccc;
+            word-break: break-all;
+        }
+
+        /* Botón enviar */
+        .btn-enviar {
+            align-self: flex-start;
+            background-color: #660000;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            padding: 14px 26px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease, filter 0.2s ease;
+        }
+
+        .btn-enviar:hover:not(:disabled) {
+            transform: scale(1.04);
+            background-color: #8a0000;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        .btn-enviar:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .estado-envio {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            min-height: 24px;
+        }
+
+        /* Logo 2 (Abajo a la derecha) */
+        .logo-2 {
+            position: fixed;
+            bottom: 20px;
+            right: 25px;
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            z-index: 10;
+        }
+
+        /* ========================================================= */
+        /*   ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (SMARTPHONES)       */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-1 {
+                height: 60px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .nav-container-wrapper {
+                margin-left: 0;
+                width: 100%;
+                max-width: 100%;
+                justify-content: center;
+            }
+
+            .nav-botones {
+                gap: 8px;
+            }
+
+            .btn-nav {
+                height: 28px;
+            }
+
+            .btn-arrow-img {
+                height: 28px;
+            }
+
+            main {
+                padding: 25px 15px 100px 15px;
+            }
+
+            .img-seccion {
+                max-width: 220px;
+                margin-bottom: 25px;
+            }
+
+            .contenedor-formulario {
+                padding: 18px;
+                gap: 18px;
+            }
+
+            .campo-label {
+                font-size: 0.8rem;
+            }
+
+            .campo-input,
+            .campo-textarea {
+                font-size: 0.8rem;
+                padding: 12px;
+            }
+
+            .btn-enviar {
+                width: 100%;
+                text-align: center;
+            }
+
+            .logo-2 {
+                bottom: 12px;
+                right: 12px;
+                height: 28px;
+            }
+        }
+
+        /* Zoom global equivalente al 75% del navegador */
+        html {
+            zoom: 0.75;
+        }
+
+        /* En móviles se conserva el diseño responsive a tamaño normal */
+        @media (max-width: 768px) {
+            html {
+                zoom: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado superior -->
+    <header>
+        <a href="index.html"><img src="https://i.imgur.com/eSClUmH.png" alt="Minecraft Deathmatch Logo" class="logo-1"></a>
+
+        <div class="nav-container-wrapper">
+            <button class="btn-nav-arrow" id="scrollLeftBtn">
+                <img src="https://i.imgur.com/3uwNBoU.png" alt="Anterior" class="btn-arrow-img">
+            </button>
+            <nav class="nav-botones" id="navBotonesContainer">
+                <a href="participantes.html"><img src="https://i.imgur.com/BmuM8tb.png" alt="Participantes" class="btn-nav"></a>
+                <a href="cambios.html"><img src="https://i.imgur.com/PrP3vfI.png" alt="Cambios" class="btn-nav"></a>
+                <a href="descargas.html"><img src="https://i.imgur.com/wQSTFtZ.png" alt="Descargas" class="btn-nav"></a>
+                <a href="contribuidores.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Contribuidores" class="btn-nav"></a>
+                <a href="noticias.html"><img src="https://i.imgur.com/g70yWIb.png" alt="Noticias" class="btn-nav"></a>
+                <a href="formulario.html"><img src="https://i.imgur.com/cX0u9UH.png" alt="Formulario" class="btn-nav"></a>
+            </nav>
+            <button class="btn-nav-arrow" id="scrollRightBtn">
+                <img src="https://i.imgur.com/3uwNBoU.png" alt="Siguiente" class="btn-arrow-img">
+            </button>
+        </div>
+    </header>
+
+    <!-- Área de contenido principal -->
+    <main>
+        <!-- Imagen de cabecera de la sección -->
+        <img src="https://i.imgur.com/cX0u9UH.png" alt="Formulario" class="img-seccion">
+
+        <!-- Formulario de postulación -->
+        <form class="contenedor-formulario" id="formParticipante">
+            <!-- 1. Nick de minecraft -->
+            <div class="campo-grupo">
+                <label for="nick" class="campo-label">1. Nick de Minecraft *</label>
+                <input type="text" id="nick" name="nick" class="campo-input" required placeholder="Ej: Steve_99">
+            </div>
+
+            <!-- 2. User de ds o contacto -->
+            <div class="campo-grupo">
+                <label for="contacto" class="campo-label">2. User de Discord o contacto *</label>
+                <input type="text" id="contacto" name="contacto" class="campo-input" required placeholder="Ej: usuario o @usuario">
+            </div>
+
+            <!-- 3. Porque quieres participar -->
+            <div class="campo-grupo">
+                <label for="motivo" class="campo-label">3. ¿Por qué quieres participar? *</label>
+                <textarea id="motivo" name="motivo" class="campo-textarea" required placeholder="Escribe aquí tu respuesta..."></textarea>
+            </div>
+
+            <!-- 4. Que habilidades tienes actuales -->
+            <div class="campo-grupo">
+                <label for="habilidades" class="campo-label">4. ¿Qué habilidades tienes actuales? *</label>
+                <textarea id="habilidades" name="habilidades" class="campo-textarea" required placeholder="Ej: PvP, construcción, supervivencia, comandos, etc."></textarea>
+            </div>
+
+            <!-- 5. Imagen de skin de minecraft -->
+            <div class="campo-grupo">
+                <span class="campo-label">5. Imagen de skin de Minecraft *</span>
+                <span class="campo-ayuda">Archivo de imagen PNG.</span>
+                <div class="file-wrapper">
+                    <label for="skinFile" class="btn-archivo">Seleccionar skin</label>
+                    <input type="file" id="skinFile" name="skinFile" class="input-file-oculto" accept="image/png" required>
+                    <span id="skinNombre" class="nombre-archivo">Ningún archivo seleccionado</span>
+                </div>
+            </div>
+
+            <!-- Botón de envío -->
+            <button type="submit" id="btnEnviar" class="btn-enviar">Enviar postulación</button>
+
+            <!-- Mensaje de estado -->
+            <p id="estadoEnvio" class="estado-envio"></p>
+        </form>
+    </main>
+
+    <!-- Logo Maci Hq Studios -->
+    <img src="https://i.imgur.com/tPcG0ge.png" alt="Maci HQ Studios Logo" class="logo-2">
+
+    <!-- Script para navegación lateral y manejo del formulario -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navContainer = document.getElementById('navBotonesContainer');
+            const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+            const scrollRightBtn = document.getElementById('scrollRightBtn');
+
+            if (navContainer && scrollLeftBtn && scrollRightBtn) {
+                scrollLeftBtn.addEventListener('click', () => {
+                    navContainer.scrollBy({ left: -200, behavior: 'smooth' });
+                });
+                scrollRightBtn.addEventListener('click', () => {
+                    navContainer.scrollBy({ left: 200, behavior: 'smooth' });
+                });
+            }
+
+            const skinInput = document.getElementById('skinFile');
+            const skinNombre = document.getElementById('skinNombre');
+            const form = document.getElementById('formParticipante');
+            const btnEnviar = document.getElementById('btnEnviar');
+            const estadoEnvio = document.getElementById('estadoEnvio');
+
+            skinInput.addEventListener('change', () => {
+                skinNombre.textContent = skinInput.files[0]
+                    ? skinInput.files[0].name
+                    : 'Ningún archivo seleccionado';
+            });
+
+            // Reemplaza esta URL por el endpoint donde guardarás los datos cuando lo conectes
+            const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbx8wsRwPHoosMVjZLQTOKKokMoe9w0ttowsBEjzZXu5-rrmJNawJiVvfzsxqU1AP575/exec';
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                estadoEnvio.style.color = '#cccccc';
+                estadoEnvio.textContent = 'Preparando envío...';
+                btnEnviar.disabled = true;
+
+                // Aquí luego leeremos los campos y el archivo de skin para enviarlos al destino elegido
+                estadoEnvio.style.color = '#ffd700';
+                estadoEnvio.textContent = 'Estructura lista. Falta conectar el endpoint de guardado.';
+                btnEnviar.disabled = false;
+            });
+        });
+    </script>
+
+</body>
+</html>
