@@ -512,14 +512,14 @@
             skinInput.addEventListener('change', () => {
                 const file = skinInput.files[0];
                 if (!file) {
-                    skinNombre.textContent = 'Ningún archivo seleccionado';
+                    skinNombre.textContent = 'Ningun archivo seleccionado';
                     return;
                 }
                 if (file.type !== 'image/png' && !file.name.toLowerCase().endsWith('.png')) {
                     estadoEnvio.style.color = '#ff6b6b';
                     estadoEnvio.textContent = 'Solo se permiten archivos en formato PNG.';
                     skinInput.value = '';
-                    skinNombre.textContent = 'Ningún archivo seleccionado';
+                    skinNombre.textContent = 'Ningun archivo seleccionado';
                     return;
                 }
                 estadoEnvio.textContent = '';
@@ -556,13 +556,13 @@
 
                 if (file.size > 2 * 1024 * 1024) {
                     estadoEnvio.style.color = '#ff6b6b';
-                    estadoEnvio.textContent = 'La imagen no debe pesar más de 2 MB.';
+                    estadoEnvio.textContent = 'La imagen no debe pesar mas de 2 MB.';
                     return;
                 }
 
                 btnEnviar.disabled = true;
                 estadoEnvio.style.color = '#cccccc';
-                estadoEnvio.textContent = 'Enviando postulación...';
+                estadoEnvio.textContent = 'Enviando postulacion...';
 
                 try {
                     const skinBase64 = await leerArchivoBase64(file);
@@ -583,9 +583,9 @@
                     });
 
                     estadoEnvio.style.color = '#55ff55';
-                    estadoEnvio.textContent = 'Postulación enviada correctamente.';
+                    estadoEnvio.textContent = 'Postulacion enviada correctamente.';
                     form.reset();
-                    skinNombre.textContent = 'Ningún archivo seleccionado';
+                    skinNombre.textContent = 'Ningun archivo seleccionado';
 
                 } catch (error) {
                     estadoEnvio.style.color = '#ff6b6b';
@@ -599,4 +599,5 @@
 
 </body>
 </html>
+
 
