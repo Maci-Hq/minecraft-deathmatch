@@ -507,29 +507,95 @@
             const btnEnviar = document.getElementById('btnEnviar');
             const estadoEnvio = document.getElementById('estadoEnvio');
 
+            const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbx8wsRwPHoosMVjZLQTOKKokMoe9w0ttowsBEjzZXu5-rrmJNawJiVvfzsxqU1AP575/exec';
+
             skinInput.addEventListener('change', () => {
-                skinNombre.textContent = skinInput.files[0]
-                    ? skinInput.files[0].name
-                    : 'Ningún archivo seleccionado';
+                const file = skinInput.files[0];
+                if (!file) {
+                    skinNombre.textContent = 'Ningún archivo seleccionado';
+                    return;
+                }
+                if (file.type !== 'image/png' && !file.name.toLowerCase().endsWith('.png')) {
+                    estadoEnvio.style.color = '#ff6b6b';
+                    estadoEnvio.textContent = 'Solo se permiten archivos en formato PNG.';
+                    skinInput.value = '';
+                    skinNombre.textContent = 'Ningún archivo seleccionado';
+                    return;
+                }
+                estadoEnvio.textContent = '';
+                skinNombre.textContent = file.name;
             });
 
-            // Reemplaza esta URL por el endpoint donde guardarás los datos cuando lo conectes
-            const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbx8wsRwPHoosMVjZLQTOKKokMoe9w0ttowsBEjzZXu5-rrmJNawJiVvfzsxqU1AP575/exec';
+            function leerArchivoBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const base64 = reader.result.split(',')[1];
+                        resolve(base64);
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            }
 
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                estadoEnvio.style.color = '#cccccc';
-                estadoEnvio.textContent = 'Preparando envío...';
-                btnEnviar.disabled = true;
 
-                // Aquí luego leeremos los campos y el archivo de skin para enviarlos al destino elegido
-                estadoEnvio.style.color = '#ffd700';
-                estadoEnvio.textContent = 'Estructura lista. Falta conectar el endpoint de guardado.';
-                btnEnviar.disabled = false;
+                const file = skinInput.files[0];
+                if (!file) {
+                    estadoEnvio.style.color = '#ff6b6b';
+                    estadoEnvio.textContent = 'Selecciona una imagen PNG de tu skin.';
+                    return;
+                }
+
+                if (file.type !== 'image/png' && !file.name.toLowerCase().endsWith('.png')) {
+                    estadoEnvio.style.color = '#ff6b6b';
+                    estadoEnvio.textContent = 'La skin debe ser un archivo PNG.';
+                    return;
+                }
+
+                if (file.size > 2 * 1024 * 1024) {
+                    estadoEnvio.style.color = '#ff6b6b';
+                    estadoEnvio.textContent = 'La imagen no debe pesar más de 2 MB.';
+                    return;
+                }
+
+                btnEnviar.disabled = true;
+                estadoEnvio.style.color = '#cccccc';
+                estadoEnvio.textContent = 'Enviando postulación...';
+
+                try {
+                    const skinBase64 = await leerArchivoBase64(file);
+
+                    const payload = {
+                        nick: document.getElementById('nick').value.trim(),
+                        contacto: document.getElementById('contacto').value.trim(),
+                        motivo: document.getElementById('motivo').value.trim(),
+                        habilidades: document.getElementById('habilidades').value.trim(),
+                        skinBase64: skinBase64
+                    };
+
+                    await fetch(ENDPOINT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    estadoEnvio.style.color = '#55ff55';
+                    estadoEnvio.textContent = 'Postulación enviada correctamente.';
+                    form.reset();
+                    skinNombre.textContent = 'Ningún archivo seleccionado';
+
+                } catch (error) {
+                    estadoEnvio.style.color = '#ff6b6b';
+                    estadoEnvio.textContent = 'Error al enviar. Intenta nuevamente.';
+                } finally {
+                    btnEnviar.disabled = false;
+                }
             });
         });
     </script>
 
 </body>
-
 </html>
