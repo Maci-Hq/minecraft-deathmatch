@@ -149,6 +149,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+        }
+
+        /* Filas para centrar el contenido y ubicar la flecha de cambio de sección a la derecha */
+        .fila-seccion {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .columna-central {
+            width: 100%;
+            max-width: 980px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Imagen de la sección (Título Contribuidores) con brillo y pulso */
@@ -255,11 +273,60 @@
             }
         }
 
+        /* Estilos para los nombres de la segunda sección */
+        .nombre-contribuidor-sec2 {
+            font-size: 1.5rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        }
+
         .descripcion-contribuidor {
             font-size: 1.15rem;
             color: #e0e0e0;
             line-height: 1.7;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Flecha lateral para alternar entre sección 1 y sección 2 */
+        .btn-cambio-pagina {
+            position: absolute;
+            right: -115px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: 3px solid #ffa500;
+            border-radius: 6px;
+            width: 58px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn-cambio-pagina:hover {
+            transform: translateY(-50%) scale(1.08);
+            background-color: rgba(255, 165, 0, 0.12);
+            box-shadow: 0 0 14px rgba(255, 165, 0, 0.65);
+        }
+
+        .flecha-pagina-svg {
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: #ffa500;
+            stroke-width: 3;
+            stroke-linecap: square;
+            stroke-linejoin: miter;
+        }
+
+        .flecha-pagina-svg.invertida {
+            transform: scaleX(-1);
+        }
+
+        .oculto {
+            display: none;
         }
 
         /* Logo 2 (Abajo a la derecha) */
@@ -312,6 +379,11 @@
                 padding: 25px 20px 100px 20px;
             }
 
+            .fila-seccion {
+                flex-direction: column;
+                gap: 20px;
+            }
+
             .img-seccion {
                 max-width: 220px;
                 margin-bottom: 25px;
@@ -330,12 +402,22 @@
                 height: 90px;
             }
 
-            .nombre-maci, .nombre-rama {
+            .nombre-maci, .nombre-rama, .nombre-contribuidor-sec2 {
                 font-size: 1.25rem;
             }
 
             .descripcion-contribuidor {
                 font-size: 1rem;
+            }
+
+            .btn-cambio-pagina {
+                position: static;
+                transform: none;
+                margin-top: 10px;
+            }
+
+            .btn-cambio-pagina:hover {
+                transform: scale(1.06);
             }
 
             .logo-2 {
@@ -384,41 +466,109 @@
 
     <!-- Área de contenido principal -->
     <main>
-        <!-- Imagen de cabecera de la sección (1) con efecto de brillo -->
-        <img src="https://i.imgur.com/vV00qWE.png" alt="Contribuidores" class="img-seccion">
+        <!-- SECCIÓN 1 -->
+        <section id="seccionContribuidores1" class="fila-seccion">
+            <div class="columna-central">
+                <!-- Imagen de cabecera de la sección (1) con efecto de brillo -->
+                <img src="https://i.imgur.com/vV00qWE.png" alt="Contribuidores" class="img-seccion">
 
-        <!-- Lista de Tarjetas de Contribuidores -->
-        <div class="contenedor-tarjetas">
+                <!-- Lista de Tarjetas de Contribuidores (Sección 1) -->
+                <div class="contenedor-tarjetas">
 
-            <!-- Contribuidor 1: Maci_Hq -->
-            <div class="tarjeta-contribuidor">
-                <div class="avatar-box">
-                    <img src="https://i.imgur.com/Q9T667J.png" alt="Avatar Maci_Hq" class="avatar-img">
-                </div>
-                <div class="info-contribuidor">
-                    <h2 class="nombre-maci">Maci_Hq</h2>
-                    <p class="descripcion-contribuidor">Creador, programador, creador de ideas principales y director de el proyecto</p>
+                    <!-- Contribuidor 1: Maci_Hq -->
+                    <div class="tarjeta-contribuidor">
+                        <div class="avatar-box">
+                            <img src="https://i.imgur.com/Q9T667J.png" alt="Avatar Maci_Hq" class="avatar-img">
+                        </div>
+                        <div class="info-contribuidor">
+                            <h2 class="nombre-maci">Maci_Hq</h2>
+                            <p class="descripcion-contribuidor">Creador, programador, creador de ideas principales y director de el proyecto</p>
+                        </div>
+                    </div>
+
+                    <!-- Contribuidor 2: RamaWM29 -->
+                    <div class="tarjeta-contribuidor">
+                        <div class="avatar-box">
+                            <img src="https://i.imgur.com/0hhCiKo.png" alt="Avatar RamaWM29" class="avatar-img">
+                        </div>
+                        <div class="info-contribuidor">
+                            <h2 class="nombre-rama">RamaWM29</h2>
+                            <p class="descripcion-contribuidor">Asistente, beta tester, gestion de participantes, ayudante del proyecto y moderador.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- Contribuidor 2: RamaWM29 -->
-            <div class="tarjeta-contribuidor">
-                <div class="avatar-box">
-                    <img src="https://i.imgur.com/0hhCiKo.png" alt="Avatar RamaWM29" class="avatar-img">
-                </div>
-                <div class="info-contribuidor">
-                    <h2 class="nombre-rama">RamaWM29</h2>
-                    <p class="descripcion-contribuidor">Asistente, beta tester, gestion de participantes, ayudante del proyecto y moderador.</p>
+            <!-- Flecha derecha para ir a la sección 2 -->
+            <button type="button" class="btn-cambio-pagina" id="irSeccion2Btn" aria-label="Ver más contribuidores">
+                <svg class="flecha-pagina-svg" viewBox="0 0 24 24">
+                    <path d="M4 9h10V5l6 7-6 7v-4H4z"></path>
+                </svg>
+            </button>
+        </section>
+
+        <!-- SECCIÓN 2: Fundación del proyecto -->
+        <section id="seccionContribuidores2" class="fila-seccion oculto">
+            <div class="columna-central">
+                <!-- Reemplaza "PON_AQUI_URL_TITULO_SECCION_2" con la imagen de título de esta sección -->
+                <img src="PON_AQUI_URL_TITULO_SECCION_2" alt="Fundación del proyecto" class="img-seccion">
+
+                <!-- Tres paneles de la sección 2 -->
+                <div class="contenedor-tarjetas">
+
+                    <!-- Panel 1: ElRichMC -->
+                    <div class="tarjeta-contribuidor">
+                        <div class="avatar-box">
+                            <!-- Reemplaza "PON_AQUI_URL_ICONO_ELRICHMC" con el icono de ElRichMC -->
+                            <img src="PON_AQUI_URL_ICONO_ELRICHMC" alt="Icono ElRichMC" class="avatar-img">
+                        </div>
+                        <div class="info-contribuidor">
+                            <h2 class="nombre-contribuidor-sec2">ElRichMC</h2>
+                            <p class="descripcion-contribuidor">Coordinación y producción, Diseño de nivel e ideas generales, Betatesteo, balance y QoL</p>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: DarthVid -->
+                    <div class="tarjeta-contribuidor">
+                        <div class="avatar-box">
+                            <!-- Reemplaza "PON_AQUI_URL_ICONO_DARTHVID" con el icono de DarthVid -->
+                            <img src="PON_AQUI_URL_ICONO_DARTHVID" alt="Icono DarthVid" class="avatar-img">
+                        </div>
+                        <div class="info-contribuidor">
+                            <h2 class="nombre-contribuidor-sec2">DarthVid</h2>
+                            <p class="descripcion-contribuidor">Construcción del mapa Diseño de nivel, entornos e historia principal. Spawners, loot y sprites del resource pack</p>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: Luisb1202 -->
+                    <div class="tarjeta-contribuidor">
+                        <div class="avatar-box">
+                            <!-- Reemplaza "PON_AQUI_URL_ICONO_LUISB1202" con el icono de Luisb1202 -->
+                            <img src="PON_AQUI_URL_ICONO_LUISB1202" alt="Icono Luisb1202" class="avatar-img">
+                        </div>
+                        <div class="info-contribuidor">
+                            <h2 class="nombre-contribuidor-sec2">Luisb1202</h2>
+                            <p class="descripcion-contribuidor">Comandos y programación, Efectos visuales, animaciones, diálogos y testing. Diseño de nivel, jefes, mecánicas y objetos especiales.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-        </div>
+            <!-- Flecha para volver a la sección 1 -->
+            <button type="button" class="btn-cambio-pagina" id="volverSeccion1Btn" aria-label="Volver a la sección anterior">
+                <svg class="flecha-pagina-svg invertida" viewBox="0 0 24 24">
+                    <path d="M4 9h10V5l6 7-6 7v-4H4z"></path>
+                </svg>
+            </button>
+        </section>
     </main>
 
     <!-- Logo Maci Hq Studios -->
     <img src="https://i.imgur.com/tPcG0ge.png" alt="Maci HQ Studios Logo" class="logo-2">
 
-    <!-- Script para el desplazamiento lateral de los botones con las flechas -->
+    <!-- Script para el desplazamiento lateral de los botones y cambio entre secciones -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const navContainer = document.getElementById('navBotonesContainer');
@@ -433,9 +583,27 @@
                     navContainer.scrollBy({ left: 200, behavior: 'smooth' });
                 });
             }
+
+            const seccion1 = document.getElementById('seccionContribuidores1');
+            const seccion2 = document.getElementById('seccionContribuidores2');
+            const irSeccion2Btn = document.getElementById('irSeccion2Btn');
+            const volverSeccion1Btn = document.getElementById('volverSeccion1Btn');
+
+            if (irSeccion2Btn && volverSeccion1Btn && seccion1 && seccion2) {
+                irSeccion2Btn.addEventListener('click', () => {
+                    seccion1.classList.add('oculto');
+                    seccion2.classList.remove('oculto');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+
+                volverSeccion1Btn.addEventListener('click', () => {
+                    seccion2.classList.add('oculto');
+                    seccion1.classList.remove('oculto');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
         });
     </script>
 
 </body>
 </html>
-
