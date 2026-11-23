@@ -26,6 +26,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
 
             /* Degradado de fondo animado */
             background: linear-gradient(180deg, #660000 0%, #1a0000 35%, #000000 70%);
@@ -152,13 +153,36 @@
             position: relative;
         }
 
-        /* Filas para centrar el contenido y ubicar la flecha de cambio de sección a la derecha */
+        /* Filas para centrar el contenido y ubicar la flecha de cambio de sección */
         .fila-seccion {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease;
+        }
+
+        .fila-seccion.deslizar-salida-izq {
+            opacity: 0;
+            transform: translateX(-70px);
+            pointer-events: none;
+        }
+
+        .fila-seccion.deslizar-salida-der {
+            opacity: 0;
+            transform: translateX(70px);
+            pointer-events: none;
+        }
+
+        .fila-seccion.deslizar-entrada-der {
+            opacity: 0;
+            transform: translateX(70px);
+        }
+
+        .fila-seccion.deslizar-entrada-izq {
+            opacity: 0;
+            transform: translateX(-70px);
         }
 
         .columna-central {
@@ -273,11 +297,23 @@
             }
         }
 
-        /* Estilos para los nombres de la segunda sección */
-        .nombre-contribuidor-sec2 {
+        /* Nombres de la sección 2 con mismo efecto pero en rojo */
+        .nombre-rojo {
             font-size: 1.5rem;
-            color: #ffd700;
+            color: #ff3333;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            animation: pulsoRojo 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulsoRojo {
+            0% {
+                filter: drop-shadow(0 0 2px rgba(255, 40, 40, 0.45));
+                transform: scale(1);
+            }
+            100% {
+                filter: drop-shadow(0 0 12px rgba(255, 50, 50, 0.95));
+                transform: scale(1.02);
+            }
         }
 
         .descripcion-contribuidor {
@@ -287,41 +323,42 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
         }
 
-        /* Flecha lateral para alternar entre sección 1 y sección 2 */
+        /* Flechas laterales de cambio de sección con imagen de Imgur */
         .btn-cambio-pagina {
             position: absolute;
-            right: -115px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
-            border: 3px solid #ffa500;
-            border-radius: 6px;
-            width: 58px;
-            height: 46px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .btn-cambio-pagina.derecha {
+            right: -105px;
+        }
+
+        .btn-cambio-pagina.izquierda {
+            left: -105px;
         }
 
         .btn-cambio-pagina:hover {
             transform: translateY(-50%) scale(1.08);
-            background-color: rgba(255, 165, 0, 0.12);
-            box-shadow: 0 0 14px rgba(255, 165, 0, 0.65);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.75));
         }
 
-        .flecha-pagina-svg {
-            width: 28px;
-            height: 28px;
-            fill: none;
-            stroke: #ffa500;
-            stroke-width: 3;
-            stroke-linecap: square;
-            stroke-linejoin: miter;
+        .img-flecha-seccion {
+            display: block;
+            height: 44px;
+            width: auto;
+            object-fit: contain;
         }
 
-        .flecha-pagina-svg.invertida {
+        .img-flecha-seccion.invertida {
             transform: scaleX(-1);
         }
 
@@ -402,7 +439,7 @@
                 height: 90px;
             }
 
-            .nombre-maci, .nombre-rama, .nombre-contribuidor-sec2 {
+            .nombre-maci, .nombre-rama, .nombre-rojo {
                 font-size: 1.25rem;
             }
 
@@ -410,14 +447,22 @@
                 font-size: 1rem;
             }
 
-            .btn-cambio-pagina {
+            .btn-cambio-pagina,
+            .btn-cambio-pagina.derecha,
+            .btn-cambio-pagina.izquierda {
                 position: static;
+                left: auto;
+                right: auto;
                 transform: none;
                 margin-top: 10px;
             }
 
             .btn-cambio-pagina:hover {
                 transform: scale(1.06);
+            }
+
+            .img-flecha-seccion {
+                height: 34px;
             }
 
             .logo-2 {
@@ -501,15 +546,18 @@
             </div>
 
             <!-- Flecha derecha para ir a la sección 2 -->
-            <button type="button" class="btn-cambio-pagina" id="irSeccion2Btn" aria-label="Ver más contribuidores">
-                <svg class="flecha-pagina-svg" viewBox="0 0 24 24">
-                    <path d="M4 9h10V5l6 7-6 7v-4H4z"></path>
-                </svg>
+            <button type="button" class="btn-cambio-pagina derecha" id="irSeccion2Btn" aria-label="Ver más contribuidores">
+                <img src="https://i.imgur.com/x0sFD1F.png" alt="Siguiente sección" class="img-flecha-seccion">
             </button>
         </section>
 
         <!-- SECCIÓN 2: Fundación del proyecto -->
         <section id="seccionContribuidores2" class="fila-seccion oculto">
+            <!-- Flecha izquierda para volver a la sección 1 -->
+            <button type="button" class="btn-cambio-pagina izquierda" id="volverSeccion1Btn" aria-label="Volver a la sección anterior">
+                <img src="https://i.imgur.com/x0sFD1F.png" alt="Sección anterior" class="img-flecha-seccion invertida">
+            </button>
+
             <div class="columna-central">
                 <!-- Reemplaza "PON_AQUI_URL_TITULO_SECCION_2" con la imagen de título de esta sección -->
                 <img src="PON_AQUI_URL_TITULO_SECCION_2" alt="Fundación del proyecto" class="img-seccion">
@@ -524,7 +572,7 @@
                             <img src="PON_AQUI_URL_ICONO_ELRICHMC" alt="Icono ElRichMC" class="avatar-img">
                         </div>
                         <div class="info-contribuidor">
-                            <h2 class="nombre-contribuidor-sec2">ElRichMC</h2>
+                            <h2 class="nombre-rojo">ElRichMC</h2>
                             <p class="descripcion-contribuidor">Coordinación y producción, Diseño de nivel e ideas generales, Betatesteo, balance y QoL</p>
                         </div>
                     </div>
@@ -536,7 +584,7 @@
                             <img src="PON_AQUI_URL_ICONO_DARTHVID" alt="Icono DarthVid" class="avatar-img">
                         </div>
                         <div class="info-contribuidor">
-                            <h2 class="nombre-contribuidor-sec2">DarthVid</h2>
+                            <h2 class="nombre-rojo">DarthVid</h2>
                             <p class="descripcion-contribuidor">Construcción del mapa Diseño de nivel, entornos e historia principal. Spawners, loot y sprites del resource pack</p>
                         </div>
                     </div>
@@ -548,27 +596,20 @@
                             <img src="PON_AQUI_URL_ICONO_LUISB1202" alt="Icono Luisb1202" class="avatar-img">
                         </div>
                         <div class="info-contribuidor">
-                            <h2 class="nombre-contribuidor-sec2">Luisb1202</h2>
+                            <h2 class="nombre-rojo">Luisb1202</h2>
                             <p class="descripcion-contribuidor">Comandos y programación, Efectos visuales, animaciones, diálogos y testing. Diseño de nivel, jefes, mecánicas y objetos especiales.</p>
                         </div>
                     </div>
 
                 </div>
             </div>
-
-            <!-- Flecha para volver a la sección 1 -->
-            <button type="button" class="btn-cambio-pagina" id="volverSeccion1Btn" aria-label="Volver a la sección anterior">
-                <svg class="flecha-pagina-svg invertida" viewBox="0 0 24 24">
-                    <path d="M4 9h10V5l6 7-6 7v-4H4z"></path>
-                </svg>
-            </button>
         </section>
     </main>
 
     <!-- Logo Maci Hq Studios -->
     <img src="https://i.imgur.com/tPcG0ge.png" alt="Maci HQ Studios Logo" class="logo-2">
 
-    <!-- Script para el desplazamiento lateral de los botones y cambio entre secciones -->
+    <!-- Script para el desplazamiento lateral de los botones y cambio animado entre secciones -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const navContainer = document.getElementById('navBotonesContainer');
@@ -588,18 +629,44 @@
             const seccion2 = document.getElementById('seccionContribuidores2');
             const irSeccion2Btn = document.getElementById('irSeccion2Btn');
             const volverSeccion1Btn = document.getElementById('volverSeccion1Btn');
+            let animando = false;
+
+            function cambiarSeccion(saliente, entrante, direccion) {
+                if (animando || !saliente || !entrante) return;
+                animando = true;
+
+                const claseSalida = direccion === 'adelante' ? 'deslizar-salida-izq' : 'deslizar-salida-der';
+                const claseEntradaInicial = direccion === 'adelante' ? 'deslizar-entrada-der' : 'deslizar-entrada-izq';
+
+                saliente.classList.add(claseSalida);
+
+                setTimeout(() => {
+                    saliente.classList.add('oculto');
+                    saliente.classList.remove(claseSalida);
+
+                    entrante.classList.remove('oculto');
+                    entrante.classList.add(claseEntradaInicial);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            entrante.classList.remove(claseEntradaInicial);
+                        });
+                    });
+
+                    setTimeout(() => {
+                        animando = false;
+                    }, 380);
+                }, 280);
+            }
 
             if (irSeccion2Btn && volverSeccion1Btn && seccion1 && seccion2) {
                 irSeccion2Btn.addEventListener('click', () => {
-                    seccion1.classList.add('oculto');
-                    seccion2.classList.remove('oculto');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    cambiarSeccion(seccion1, seccion2, 'adelante');
                 });
 
                 volverSeccion1Btn.addEventListener('click', () => {
-                    seccion2.classList.add('oculto');
-                    seccion1.classList.remove('oculto');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    cambiarSeccion(seccion2, seccion1, 'atras');
                 });
             }
         });
