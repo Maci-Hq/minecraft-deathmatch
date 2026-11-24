@@ -183,6 +183,13 @@
             max-width: 950px;
             display: flex;
             flex-direction: column;
+            gap: 35px;
+        }
+
+        .bloque-noticia {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
             gap: 15px;
         }
 
@@ -236,6 +243,17 @@
         .video-container:hover img {
             transform: scale(1.03);
             filter: brightness(1.08);
+        }
+
+        /* Imagen de noticia */
+        .img-noticia {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background-color: #000000;
+            object-fit: contain;
         }
 
         /* Descripción de la noticia */
@@ -364,19 +382,31 @@
         <!-- Imagen de cabecera de la sección (Noticias) con brillo dorado -->
         <img src="https://i.imgur.com/9p1QpJw.png" alt="Noticias" class="img-seccion">
 
-        <!-- Contenedor del bloque de la noticia -->
+        <!-- Contenedor de los bloques de noticias -->
         <div class="contenedor-noticias">
-            <!-- Fecha alineada a la izquierda -->
-            <span class="fecha-noticia">14/11/2026</span>
+            <!-- Noticia 24/11/2026 -->
+            <div class="bloque-noticia">
+                <span class="fecha-noticia">24/11/2026</span>
 
-            <div class="panel-noticia">
-                <!-- Imagen clickeable que lleva al video en YouTube -->
-                <!-- Reemplaza "PON_AQUI_LA_URL_DE_TU_IMAGEN" con la URL de tu imagen -->
-                <a href="https://youtu.be/PDS-Lj1gU_Y" target="_blank" rel="noopener noreferrer" class="video-container" aria-label="Ver Video trailer 1 en YouTube">
-                    <img src="https://i.imgur.com/lA6LbaH.png" alt="Video trailer 1" loading="lazy">
-                </a>
-                <!-- Descripción -->
-                <p class="desc-noticia">Video trailer 1 lanzado</p>
+                <div class="panel-noticia">
+                    <!-- Reemplaza "PON_AQUI_LA_URL_DE_TU_AFICHE" con la URL de tu imagen -->
+                    <img src="https://i.imgur.com/nf4Mmod.png" alt="Primer Afiche Publicitario del Servidor" class="img-noticia" loading="lazy">
+                    <p class="desc-noticia">Lanzamiento del primer Afiche Publicitario del Servidor</p>
+                </div>
+            </div>
+
+            <!-- Noticia 14/11/2026 -->
+            <div class="bloque-noticia">
+                <span class="fecha-noticia">14/11/2026</span>
+
+                <div class="panel-noticia">
+                    <!-- Imagen clickeable que lleva al video en YouTube -->
+                    <a href="https://youtu.be/PDS-Lj1gU_Y" target="_blank" rel="noopener noreferrer" class="video-container" aria-label="Ver Video trailer 1 en YouTube">
+                        <img src="https://i.imgur.com/lA6LbaH.png" alt="Video trailer 1" loading="lazy">
+                    </a>
+                    <!-- Descripción -->
+                    <p class="desc-noticia">Video trailer 1 lanzado</p>
+                </div>
             </div>
         </div>
     </main>
@@ -404,6 +434,3 @@
 
 </body>
 </html>
-
-
-
