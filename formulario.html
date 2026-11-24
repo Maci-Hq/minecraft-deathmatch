@@ -307,6 +307,14 @@
             cursor: not-allowed;
         }
 
+        /* Texto verde brillante debajo del botón de enviar */
+        .aviso-entrada-verde {
+            font-size: 0.85rem;
+            color: #39ff14;
+            line-height: 1.7;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.75), 2px 2px 4px rgba(0, 0, 0, 0.95);
+        }
+
         .estado-envio {
             font-size: 0.85rem;
             line-height: 1.6;
@@ -386,6 +394,10 @@
             .btn-enviar {
                 width: 100%;
                 text-align: center;
+            }
+
+            .aviso-entrada-verde {
+                font-size: 0.75rem;
             }
 
             .logo-2 {
@@ -474,8 +486,17 @@
                 </div>
             </div>
 
+            <!-- 6. Disponibilidad de dias -->
+            <div class="campo-grupo">
+                <label for="disponibilidad14Dias" class="campo-label">6. ¿Tienes minimo 14 dias disponibles para jugar todo el servidor? *</label>
+                <input type="text" id="disponibilidad14Dias" name="disponibilidad14Dias" class="campo-input" required placeholder="Ej: Si / No">
+            </div>
+
             <!-- Botón de envío -->
             <button type="submit" id="btnEnviar" class="btn-enviar">Enviar postulación</button>
+
+            <!-- Texto verde brillante debajo del botón de enviar -->
+            <p class="aviso-entrada-verde">Este servidor es con entrada / $4000. Solo se les cobrara a los participantes que terminen siendo confirmados</p>
 
             <!-- Mensaje de estado -->
             <p id="estadoEnvio" class="estado-envio"></p>
@@ -572,6 +593,7 @@
                         contacto: document.getElementById('contacto').value.trim(),
                         motivo: document.getElementById('motivo').value.trim(),
                         habilidades: document.getElementById('habilidades').value.trim(),
+                        disponibilidad14Dias: document.getElementById('disponibilidad14Dias').value.trim(),
                         skinBase64: skinBase64
                     };
 
@@ -599,6 +621,3 @@
 
 </body>
 </html>
-
-
-
