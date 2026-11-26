@@ -216,6 +216,46 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.85);
         }
 
+        /* Contenido clickeable para mostrar/ocultar galería de imágenes */
+        .contenido-galeria-trigger {
+            width: 100%;
+            background-color: rgba(20, 0, 0, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 6px;
+            padding: 18px 20px;
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .contenido-galeria-trigger:hover {
+            border-color: #ffd700;
+            background-color: rgba(45, 0, 0, 0.85);
+        }
+
+        .estado-galeria {
+            font-size: 0.85rem;
+            color: #ffd700;
+            flex-shrink: 0;
+        }
+
+        .galeria-imagenes {
+            display: none;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .galeria-imagenes.abierta {
+            display: flex;
+        }
+
         /* Contenedor responsive para la imagen clickeable del video */
         .video-container {
             position: relative;
@@ -329,6 +369,13 @@
                 gap: 15px;
             }
 
+            .contenido-galeria-trigger {
+                font-size: 0.85rem;
+                padding: 14px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             .desc-noticia {
                 font-size: 0.95rem;
             }
@@ -370,6 +417,7 @@
                 <a href="contribuidores.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Contribuidores" class="btn-nav"></a>
                 <a href="noticias.html"><img src="https://i.imgur.com/g70yWIb.png" alt="Noticias" class="btn-nav"></a>
                 <a href="formulario.html"><img src="https://i.imgur.com/cX0u9UH.png" alt="Formulario" class="btn-nav"></a>
+                <a href="reglas.html"><img src="https://i.imgur.com/PpmLP8a.png" alt="Reglas" class="btn-nav"></a>
             </nav>
             <button class="btn-nav-arrow" id="scrollRightBtn">
                 <img src="https://i.imgur.com/x0sFD1F.png" alt="Siguiente" class="btn-arrow-img">
@@ -384,12 +432,31 @@
 
         <!-- Contenedor de los bloques de noticias -->
         <div class="contenedor-noticias">
+            <!-- Noticia 26/11/2026 -->
+            <div class="bloque-noticia">
+                <span class="fecha-noticia">26/11/2026</span>
+
+                <div class="panel-noticia">
+                    <button type="button" class="contenido-galeria-trigger" id="toggleGaleria2611" aria-expanded="false" aria-controls="galeria2611">
+                        <span>Click aquí para ver las imágenes del resumen</span>
+                        <span class="estado-galeria" id="estadoGaleria2611">[Mostrar 3 imágenes]</span>
+                    </button>
+
+                    <div class="galeria-imagenes" id="galeria2611">
+                        <img src="https://i.imgur.com/MaX35lM.png" alt="Resumen charla informativa - Imagen 1" class="img-noticia" loading="lazy">
+                        <img src="https://i.imgur.com/gZrDWi0.png" alt="Resumen charla informativa - Imagen 2" class="img-noticia" loading="lazy">
+                        <img src="https://i.imgur.com/kDYzOLt.png" alt="Resumen charla informativa - Imagen 3" class="img-noticia" loading="lazy">
+                    </div>
+
+                    <p class="desc-noticia">Resumen de la charla informativa (No se incluyen preguntas hechas por el publico aun)</p>
+                </div>
+            </div>
+
             <!-- Noticia 24/11/2026 -->
             <div class="bloque-noticia">
                 <span class="fecha-noticia">24/11/2026</span>
 
                 <div class="panel-noticia">
-                    <!-- Reemplaza "PON_AQUI_LA_URL_DE_TU_AFICHE" con la URL de tu imagen -->
                     <img src="https://i.imgur.com/nf4Mmod.png" alt="Primer Afiche Publicitario del Servidor" class="img-noticia" loading="lazy">
                     <p class="desc-noticia">Lanzamiento del primer Afiche Publicitario del Servidor</p>
                 </div>
@@ -427,6 +494,18 @@
                 });
                 scrollRightBtn.addEventListener('click', () => {
                     navContainer.scrollBy({ left: 200, behavior: 'smooth' });
+                });
+            }
+
+            const toggleGaleria = document.getElementById('toggleGaleria2611');
+            const galeria = document.getElementById('galeria2611');
+            const estadoGaleria = document.getElementById('estadoGaleria2611');
+
+            if (toggleGaleria && galeria && estadoGaleria) {
+                toggleGaleria.addEventListener('click', () => {
+                    const abierta = galeria.classList.toggle('abierta');
+                    toggleGaleria.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+                    estadoGaleria.textContent = abierta ? '[Ocultar imágenes]' : '[Mostrar 3 imágenes]';
                 });
             }
         });
