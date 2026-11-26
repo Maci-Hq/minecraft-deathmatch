@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Deathmatch - Reglas</title>
+
+    <style>
+        /* Carga de la fuente personalizada local */
+        @font-face {
+            font-family: 'MinecraftCustom';
+            src: url('Minecraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MinecraftCustom', monospace, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a0000;
+            position: relative;
+        }
+
+        /* Capa de degradado estática optimizada */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #660000 0%, #1a0000 40%, #000000 80%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Barra superior / Encabezado */
+        header {
+            width: 100%;
+            padding: 4px 30px;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* Logo 1 (Arriba a la izquierda) */
+        .logo-1 {
+            height: 100px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            margin-top: 30px;
+            margin-bottom: 4px;
+        }
+
+        /* Contenedor con flechas para navegación superior */
+        .nav-container-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 30px;
+            position: relative;
+            max-width: calc(100vw - 200px);
+        }
+
+        .nav-botones {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            padding: 4px 2px;
+        }
+
+        .nav-botones::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .btn-nav {
+            display: block;
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            cursor: pointer;
+            will-change: transform, filter;
+            transform: translateZ(0);
+            transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), filter 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .btn-nav:hover {
+            transform: scale(1.06) translateZ(0);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+        }
+
+        /* Flechas de navegación con imágenes */
+        .btn-nav-arrow {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .btn-arrow-img {
+            display: block;
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            transform: scaleX(-1);
+        }
+
+        #scrollRightBtn .btn-arrow-img {
+            transform: scaleX(1);
+        }
+
+        .btn-nav-arrow:hover {
+            transform: scale(1.06);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+        }
+
+        /* Contenedor principal */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 40px 180px 140px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Imagen de cabecera de la sección con brillo y pulso */
+        .img-seccion {
+            max-width: 320px;
+            width: 80%;
+            height: auto;
+            margin-bottom: 45px;
+            object-fit: contain;
+            will-change: transform, filter;
+            transform: translateZ(0);
+            animation: pulsoSeccion 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulsoSeccion {
+            0% {
+                transform: scale(1) translateZ(0);
+                filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+            }
+            100% {
+                transform: scale(1.04) translateZ(0);
+                filter: drop-shadow(0 0 22px rgba(255, 215, 0, 0.8));
+            }
+        }
+
+        /* Contenedor de reglas */
+        .contenedor-reglas {
+            width: 100%;
+            max-width: 950px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.85);
+        }
+
+        .regla-item {
+            font-size: 1.15rem;
+            color: #ffffff;
+            line-height: 1.7;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            text-align: left;
+        }
+
+        /* Logo 2 (Abajo a la derecha) */
+        .logo-2 {
+            position: fixed;
+            bottom: 20px;
+            right: 25px;
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            z-index: 10;
+        }
+
+        /* ========================================================= */
+        /*   ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (SMARTPHONES)       */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-1 {
+                height: 60px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .nav-container-wrapper {
+                margin-left: 0;
+                width: 100%;
+                max-width: 100%;
+                justify-content: center;
+            }
+
+            .nav-botones {
+                gap: 8px;
+            }
+
+            .btn-nav {
+                height: 28px;
+            }
+
+            .btn-arrow-img {
+                height: 28px;
+            }
+
+            main {
+                padding: 25px 15px 100px 15px;
+            }
+
+            .img-seccion {
+                max-width: 220px;
+                margin-bottom: 25px;
+            }
+
+            .contenedor-reglas {
+                padding: 20px;
+                gap: 16px;
+            }
+
+            .regla-item {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            .logo-2 {
+                bottom: 12px;
+                right: 12px;
+                height: 28px;
+            }
+        }
+
+        /* Zoom global equivalente al 75% del navegador en PC */
+        html {
+            zoom: 0.75;
+        }
+
+        /* En móviles se conserva el diseño responsive a tamaño normal */
+        @media (max-width: 768px) {
+            html {
+                zoom: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado superior -->
+    <header>
+        <a href="index.html"><img src="https://i.imgur.com/eSClUmH.png" alt="Minecraft Deathmatch Logo" class="logo-1"></a>
+
+        <div class="nav-container-wrapper">
+            <button class="btn-nav-arrow" id="scrollLeftBtn">
+                <img src="https://i.imgur.com/x0sFD1F.png" alt="Anterior" class="btn-arrow-img">
+            </button>
+            <nav class="nav-botones" id="navBotonesContainer">
+                <a href="participantes.html"><img src="https://i.imgur.com/BmuM8tb.png" alt="Participantes" class="btn-nav"></a>
+                <a href="cambios.html"><img src="https://i.imgur.com/PrP3vfI.png" alt="Cambios" class="btn-nav"></a>
+                <a href="descargas.html"><img src="https://i.imgur.com/wQSTFtZ.png" alt="Descargas" class="btn-nav"></a>
+                <a href="contribuidores.html"><img src="https://i.imgur.com/kHKAbia.png" alt="Contribuidores" class="btn-nav"></a>
+                <a href="noticias.html"><img src="https://i.imgur.com/g70yWIb.png" alt="Noticias" class="btn-nav"></a>
+                <a href="formulario.html"><img src="https://i.imgur.com/cX0u9UH.png" alt="Formulario" class="btn-nav"></a>
+                <a href="reglas.html"><img src="https://i.imgur.com/PpmLP8a.png" alt="Reglas" class="btn-nav"></a>
+            </nav>
+            <button class="btn-nav-arrow" id="scrollRightBtn">
+                <img src="https://i.imgur.com/x0sFD1F.png" alt="Siguiente" class="btn-arrow-img">
+            </button>
+        </div>
+    </header>
+
+    <!-- Área de contenido principal -->
+    <main>
+        <!-- Imagen de cabecera de la sección Reglas -->
+        <img src="https://i.imgur.com/I2XWfX8.png" alt="Reglas" class="img-seccion">
+
+        <!-- Lista de reglas -->
+        <section class="contenedor-reglas">
+            <p class="regla-item">1- No se permite el uso de hacks, mods, texturas o recursos que permitan ventajas que los demas no posean.</p>
+            <p class="regla-item">2- Respeto entre participantes y evitar doxing o conflictos que escalen fuera del juego.</p>
+            <p class="regla-item">3- No spam de mensajes.</p>
+            <p class="regla-item">4- No causar acciones (por ejemplo maquinas de lag) que afecten el rendimiento del server o lo TPS.</p>
+            <p class="regla-item">5- Evitar la destruccion intensionada y masiva de construcciones (Tanto naturales como de usuarios). Esta restriccion al griefing no significa que no se pueda robar en el servidor.</p>
+            <p class="regla-item">6- Minimo 1 hora y media durante los dias.</p>
+            <p class="regla-item">7- Jugar los 14 dias del evento.</p>
+            <p class="regla-item">8- Evitar saturar a la administracion con mensajes. Se responderan a todas las problematicas, pero deben tener en cuenta que en el caso que haya una gran cantidad de mensajes la respuesta puede tardar.</p>
+        </section>
+    </main>
+
+    <!-- Logo Maci Hq Studios -->
+    <img src="https://i.imgur.com/tPcG0ge.png" alt="Maci HQ Studios Logo" class="logo-2">
+
+    <!-- Script para el desplazamiento lateral de los botones con las flechas -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navContainer = document.getElementById('navBotonesContainer');
+            const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+            const scrollRightBtn = document.getElementById('scrollRightBtn');
+
+            if (navContainer && scrollLeftBtn && scrollRightBtn) {
+                scrollLeftBtn.addEventListener('click', () => {
+                    navContainer.scrollBy({ left: -200, behavior: 'smooth' });
+                });
+                scrollRightBtn.addEventListener('click', () => {
+                    navContainer.scrollBy({ left: 200, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
